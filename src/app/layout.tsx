@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import UserCounter from "@/components/UserCounter";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -41,7 +42,9 @@ export default async function RootLayout({
           className={"pb-10 flex flex-col relative"}
           style={{ flexGrow: 999 }}
         >
+          {/* TODO Прописать брейкпоинты */}
           {children}
+          <UserCounter />
         </main>
         <Footer />
       </body>
