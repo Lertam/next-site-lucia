@@ -24,7 +24,6 @@ const Profile = async () => {
 export const LoginCircle: FC = () => {
   return (
     <Link
-      as={"div"}
       className={
         "w-[98px] h-[98px] border-white border rounded-full flex flex-col justify-center align-middle"
       }
