@@ -19,6 +19,10 @@ const robotoRegular = localFont({
   src: "./fonts/Roboto-Regular.ttf",
 });
 
+const openSans = localFont({
+  src: "./fonts/OpenSans-VariableFont_wdth,wght.ttf",
+});
+
 export const metadata: Metadata = {
   title: {
     template: "%s | Ретушь и картинки для гравировки",
@@ -39,9 +43,7 @@ export default async function RootLayout({
       >
         <Header />
         <main
-          className={
-            "pb-10 relative md:max-w-[720px] lg:max-w-[940px] xl:max-w-[1140px] m-auto w-full"
-          }
+          className={`${openSans.className} pb-10 relative md:max-w-[720px] lg:max-w-[940px] xl:max-w-[1140px] m-auto w-full px-2 sm:py-0`}
           style={{ flexGrow: 999 }}
         >
           {/* TODO Прописать брейкпоинты */}

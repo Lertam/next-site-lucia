@@ -26,7 +26,7 @@ const CardWrapper: FC<PropsWithChildren<{ image: string; title: string }>> = ({
           "w-full h-full absolute top-0 left-0 bg-cover bg-no-repeat bg-center z-0"
         }
         style={{
-          backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("${image}");`,
+          backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("${image}")`,
           transition: "transform 500ms ease",
           transitionDuration: "3s",
           ...hoverStyles,
