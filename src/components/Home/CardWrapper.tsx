@@ -34,7 +34,9 @@ const CardWrapper: FC<PropsWithChildren<{ image: string; title: string }>> = ({
       ></div>
       <div className={"z-10 w-full h-full relative"}>
         <div
-          className={"absolute top-7 left-7 text-white"}
+          className={
+            "absolute top-1 text-center w-full md:w-auto md:top-7 md:left-7 text-white"
+          }
           style={{ fontSize: "1rem", textShadow: "2px 2px 10px rgba(0,0,0,1)" }}
         >
           {title}

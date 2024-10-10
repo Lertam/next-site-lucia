@@ -43,7 +43,7 @@ export default async function RootLayout({
       >
         <Header />
         <main
-          className={`${openSans.className} pb-10 relative md:max-w-[720px] lg:max-w-[940px] xl:max-w-[1140px] m-auto w-full px-2 sm:py-0`}
+          className={`${openSans.className} pb-10 mb-10 relative md:max-w-[720px] lg:max-w-[940px] xl:max-w-[1140px] m-auto w-full px-2 sm:py-0`}
           style={{ flexGrow: 999 }}
         >
           {/* TODO Прописать брейкпоинты */}
