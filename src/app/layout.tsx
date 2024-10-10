@@ -33,13 +33,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang={"ru"}>
       <body
-        className={`${robotoRegular.className} antialiased flex flex-col h-[100vh]`}
+        className={`${robotoRegular.className} antialiased flex flex-col h-[100vh] align-middle`}
       >
         <Header />
         <main
-          className={"pb-10 flex flex-col relative"}
+          className={
+            "pb-10 relative md:max-w-[720px] lg:max-w-[940px] xl:max-w-[1140px] m-auto w-full"
+          }
           style={{ flexGrow: 999 }}
         >
           {/* TODO Прописать брейкпоинты */}
