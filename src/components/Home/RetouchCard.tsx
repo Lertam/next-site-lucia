@@ -4,7 +4,7 @@ import CardButton from "./CardButton";
 const RetouchCard = () => {
   return (
     <CardWrapper
-      image={"images/home/Retouch.jpg"}
+      image={"/images/home/Retouch.jpg"}
       title={"Ретушь для гравировки"}
     >
       <div

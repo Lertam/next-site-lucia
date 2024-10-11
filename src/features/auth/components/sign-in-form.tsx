@@ -10,13 +10,14 @@ const SignInForm = () => {
     errors: undefined,
   });
   return (
-    <form className={"w-[570px] m-auto p-3.5"} action={action}>
+    <form className={"w-[570px] m-auto p-3.5"} action={action} autoComplete={"on"}>
       <div className={"flex flex-col"}>
         <FormInput
           label={"Логин или Email"}
           id={"login"}
           name={"login"}
           required
+          autocomplete={"username"}
           error={state?.errors?.login}
         />
         <FormInput
@@ -25,6 +26,7 @@ const SignInForm = () => {
           name={"password"}
           type={"password"}
           required
+          autocomplete={"current-password"}
           error={state?.errors?.password}
         />
         <SubmitButton text={"Войти"} loadingText={"Входим"} />

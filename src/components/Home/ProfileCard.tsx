@@ -4,7 +4,7 @@ import CardWrapper from "./CardWrapper";
 const ProfilePage = () => {
   return (
     <CardWrapper
-      image={"images/home/Profile.jpg"}
+      image={"/images/home/Profile.jpg"}
       title={"Кабинет пользователя"}
     >
       <div

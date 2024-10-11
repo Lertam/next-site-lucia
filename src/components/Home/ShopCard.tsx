@@ -4,7 +4,7 @@ import CardWrapper from "./CardWrapper";
 const ShopCard = () => {
   return (
     <CardWrapper
-      image={"images/home/Shop.jpg"}
+      image={"/images/home/Shop.jpg"}
       title={"Картинки для гравировки"}
     >
       <div

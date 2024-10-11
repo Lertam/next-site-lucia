@@ -9,7 +9,8 @@ const FormInput: FC<{
 	min?: number;
 	required?: boolean;
 	error?: string[];
-}> = ({ label, type, min, name, id, placeholder, required, error }) => {
+	autocomplete?: string
+}> = ({ label, type, min, name, id, placeholder, required, error, autocomplete }) => {
 	return (
 		<div className={"flex flex-col mb-4"}>
 			<label htmlFor={id}>{label}</label>
@@ -21,6 +22,7 @@ const FormInput: FC<{
 				id={id}
 				placeholder={placeholder}
 				required={required}
+				autoComplete={autocomplete}
 			/>
 			{error && error.length > 0 && (
 				<p className={"text-red-500 text-sm"}>{error[0]}</p>
