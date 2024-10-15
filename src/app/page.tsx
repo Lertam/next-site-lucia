@@ -4,8 +4,11 @@ import ProfileCard from "@/components/Home/ProfileCard";
 import RetouchCard from "@/components/Home/RetouchCard";
 import Retouchers from "@/components/Home/Retouchers";
 import ShopCard from "@/components/Home/ShopCard";
+import { getAuth } from "@/features/auth/queries/get-auth";
 
-export default function Home() {
+export default async function Home() {
+  const { user, session } = await getAuth();
+  console.log(user, session)
   return (
     <div className={"h-full w-full m-auto flex flex-col"}>
       <h1 className={"text-center font-bold mt-4 uppercase relative"}>
