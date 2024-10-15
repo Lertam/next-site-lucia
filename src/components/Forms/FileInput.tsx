@@ -7,9 +7,10 @@ const FileInput: FC<{
   label: string;
   error?: string[];
 }> = ({ id, name, value, label, error }) => {
+  console.log(value);
   return (
     <div className={"flex flex-col mb-4"}>
-      {value && <img src={value} />}
+      {value && value.length > 0 && <img src={value} className={"max-w-40"}/>}
       <label htmlFor={id}>{label}</label>
       <input type={"file"} id={id} name={name} />
       {error && error.length > 0 && (

@@ -6,8 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { RetouchService } from "@prisma/client";
 import { generateId } from "lucia";
 import { redirect } from "next/navigation";
-
-const PATH_TO_IMAGES = "public/modules/services/images";
+import { PATH_TO_IMAGES } from "../directories";
 
 type RetouchServiceEditForm = {
   errors?: {
@@ -37,9 +36,9 @@ const RetouchServiceEditFormSchema = z.object({
   weight: z
     .string()
     .refine((w) => !isNaN(parseInt(w)), { message: "Укажите число" }),
-  image: z.any().refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), {
-    message: "Недопустимый формат изображения",
-  }),
+  // image: z.any().optional().refine((file) => file ? ACCEPTED_IMAGE_TYPES.includes(file.type): false, {
+  //   message: "Недопустимый формат изображения",
+  // }),
 });
 
 export const editRetouchService = async (
@@ -50,7 +49,7 @@ export const editRetouchService = async (
     title: formData.get("title"),
     description: formData.get("description"),
     weight: formData.get("weight"),
-    image: formData.get("image"),
+    // image: formData.get("image"),
     serviceId: formData.get("serviceId"),
   });
 
@@ -65,13 +64,22 @@ export const editRetouchService = async (
       },
     });
   }
+  const image = formData.get("image") as File;
 
   let filename: string | undefined = undefined;
-  if (parsedInput.data.image) {
-    const { ext } = path.parse(parsedInput.data.image.name);
+  if (image && image.size > 0) {
+    if (!ACCEPTED_IMAGE_TYPES.includes(image.type)) {
+      return {
+        errors: {
+          image: ["Недопустимый формат изображения"],
+        },
+        ok: false,
+      };
+    }
+    const { ext } = path.parse(image.name);
     filename = crypto.randomUUID() + ext;
 
-    const buffer = await parsedInput.data.image.arrayBuffer(); // Получаем байты из файла
+    const buffer = await image.arrayBuffer(); // Получаем байты из файла
     const imageBuffer = Buffer.from(buffer);
 
     await fs.writeFile(`${PATH_TO_IMAGES}/${filename}`, imageBuffer);
@@ -108,7 +116,6 @@ export const editRetouchService = async (
     });
   } else {
     // Модифицируем услугу
-
     if (!service) {
       throw new Error("Cannot find service");
     }
