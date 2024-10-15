@@ -30,6 +30,8 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  passwordResetToken PasswordResetToken[]
 }
 
 model Session {
@@ -37,4 +39,14 @@ model Session {
   expiresAt DateTime
   userId String
   user User @relation(references: [id], fields: [userId])
+}
+
+model PasswordResetToken {
+  userId String @id
+  user User @relation(fields: [userId], references: [id])
+  token String @unique
+  expires DateTime
+  used Boolean @default(false)
+
+  @@index(fields: [userId, token])
 }

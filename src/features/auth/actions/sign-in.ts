@@ -37,9 +37,12 @@ const signIn = async (
     return { errors: parsedInput.error.flatten().fieldErrors };
   }
   try {
-    const user = await prisma?.user.findUnique({
+    const user = await prisma?.user.findFirst({
       where: {
-        email: parsedInput.data.login,
+        OR: [
+          { email: parsedInput.data.login },
+          { login: parsedInput.data.login },
+        ],
       },
     });
     if (!user) {
@@ -50,6 +53,7 @@ const signIn = async (
       user.hashedPassword,
       parsedInput.data.password
     );
+    console.log(user.hashedPassword);
 
     if (!validPassword) {
       return { errors: { password: ["Неправильный логин или пароль"] } };
