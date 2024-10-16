@@ -1,11 +1,25 @@
 "use client";
-import { RetouchService } from "@prisma/client";
-import { FC, useState } from "react";
+import { RetouchPrice, RetouchService } from "@prisma/client";
+import { FC, useEffect, useState } from "react";
 import RetouchServiceCard from "./Card";
 import RetouchPrices from "./Prices";
 
-const RetouchServices: FC<{ services: RetouchService[] }> = ({ services }) => {
+const RetouchServices: FC<{
+  services: RetouchService[];
+  getRetouchPrices: (serviceId: string) => Promise<RetouchPrice[]>;
+}> = ({ services, getRetouchPrices }) => {
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
+
+  const [prices, setPrices] = useState<RetouchPrice[]>([]);
+  useEffect(() => {
+    if(selectedNode) {
+      const fetchPrices = async () => {
+        const pr = await getRetouchPrices(selectedNode);
+        setPrices(pr);
+      }
+      fetchPrices();
+    }
+  }, [selectedNode, getRetouchPrices])
   return (
     <>
       <div
@@ -23,7 +37,7 @@ const RetouchServices: FC<{ services: RetouchService[] }> = ({ services }) => {
           />
         ))}
       </div>
-      {selectedNode && <RetouchPrices serviceId={selectedNode} />}
+      {selectedNode && <RetouchPrices serviceId={selectedNode} prices={prices} />}
     </>
   );
 };
