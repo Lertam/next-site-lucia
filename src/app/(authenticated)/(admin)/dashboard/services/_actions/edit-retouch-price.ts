@@ -61,7 +61,6 @@ export const editRetouchPrice = async (
     });
   }
 
-  console.log(formData.get("express"));
   if (parsedInput.data.priceId === "add") {
     // Создаем услугу
     price = await prisma.retouchPrice.create({
@@ -95,7 +94,7 @@ export const editRetouchPrice = async (
     });
   }
 
-  redirect("/dashboard/services");
+  redirect(`/dashboard/services/${parsedInput.data.serviceId}`);
   return {
     ok: true,
   };

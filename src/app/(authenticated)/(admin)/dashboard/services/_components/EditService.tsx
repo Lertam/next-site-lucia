@@ -4,21 +4,16 @@ import FormInput from "@/components/Forms/FormInput";
 import SubmitButton from "@/components/Forms/SubmitButton";
 import { FC, useState } from "react";
 import { useFormState } from "react-dom";
-import { editRetouchService } from "../actions/edit-retouch-service";
 import { RetouchService } from "@prisma/client";
-import { deleteRetouchService } from "../actions/delete-retouch-service";
+import { editRetouchService } from "../_actions/edit-retouch-service";
+import { deleteRetouchService } from "../_actions/delete-retouch-service";
 
-const EditServiceForm: FC<{ id: string; service?: RetouchService }> = ({
-  id,
-  service,
-}) => {
-  const [form] = useState<
-    Omit<RetouchService, "image"> & { image?: string }
-  >(
+const EditServiceForm: FC<{ service?: RetouchService }> = ({ service }) => {
+  const [form] = useState<Omit<RetouchService, "image"> & { image?: string }>(
     service
       ? service
       : {
-          id,
+          id: "add",
           title: "",
           description: "",
           image: undefined,
@@ -29,7 +24,11 @@ const EditServiceForm: FC<{ id: string; service?: RetouchService }> = ({
   const [state, action] = useFormState(editRetouchService, { ok: false });
   return (
     <form className={"mt-4"} action={action}>
-      <input type={"hidden"} name={"serviceId"} value={id} />
+      <input
+        type={"hidden"}
+        name={"serviceId"}
+        value={service ? service.id : "add"}
+      />
       <div className={"grid grid-cols-1 md:grid-cols-2 gap-4"}>
         <FormInput
           id={"title"}
@@ -71,8 +70,7 @@ const EditServiceForm: FC<{ id: string; service?: RetouchService }> = ({
             onClick={(ev) => {
               ev.preventDefault();
               if (confirm("Вы уверены?")) {
-                console.log("delete", id, service);
-                deleteRetouchService(id);
+                deleteRetouchService(service.id);
               }
             }}
           >

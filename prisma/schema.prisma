@@ -59,6 +59,7 @@ model RetouchService {
   image       String
 
   prices RetouchPrice[]
+  variants RetouchVariant[]
 }
 
 model RetouchPrice {
@@ -82,4 +83,7 @@ model RetouchVariant {
   image String
   withText Boolean @default(false)
   withFiles Boolean @default(false)
+
+  serviceId String
+  service RetouchService @relation(fields: [serviceId], references: [id])
 }

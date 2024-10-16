@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import path from "path";
 import fs from "fs";
-import { PATH_TO_IMAGES } from "../directories";
+import { PATH_TO_IMAGES } from "../_directories";
 
 export const deleteRetouchService = async (
   serviceId: string

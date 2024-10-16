@@ -3,10 +3,11 @@
 import FormCheckbox from "@/components/Forms/FormCheckbox";
 import FormInput from "@/components/Forms/FormInput";
 import SubmitButton from "@/components/Forms/SubmitButton";
-import { editRetouchPrice } from "@/features/services/actions/edit-retouch-price";
+import { editRetouchPrice } from "@/app/(authenticated)/(admin)/dashboard/services/_actions/edit-retouch-price";
 import { RetouchPrice } from "@prisma/client";
 import { FC } from "react";
 import { useFormState } from "react-dom";
+import { deleteRetouchPrice } from "../_actions/delete-retouch-price";
 
 const EditRetouchPriceForm: FC<{
   serviceId: string;
@@ -14,7 +15,7 @@ const EditRetouchPriceForm: FC<{
   price?: RetouchPrice;
 }> = ({ priceId, serviceId, price }) => {
   const [state, action] = useFormState(editRetouchPrice, { ok: false });
-  console.log(price);
+
   return (
     <form className={"mt-4"} action={action}>
       <input type={"hidden"} name={"serviceId"} value={serviceId} />
@@ -75,8 +76,7 @@ const EditRetouchPriceForm: FC<{
             onClick={(ev) => {
               ev.preventDefault();
               if (confirm("Вы уверены?")) {
-                // console.log("delete", id, service);
-                // deleteRetouchService(id);
+                deleteRetouchPrice(price.id);
               }
             }}
           >

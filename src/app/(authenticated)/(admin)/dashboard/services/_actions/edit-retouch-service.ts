@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { RetouchService } from "@prisma/client";
 import { generateId } from "lucia";
 import { redirect } from "next/navigation";
-import { PATH_TO_IMAGES } from "../directories";
+import { PATH_TO_IMAGES } from "../_directories";
 
 type RetouchServiceEditForm = {
   errors?: {

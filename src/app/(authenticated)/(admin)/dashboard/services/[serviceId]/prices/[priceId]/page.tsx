@@ -1,7 +1,7 @@
 import BackLink from "@/components/Common/BackLink";
-import EditRetouchPriceForm from "@/features/services/components/RetouchServices/Prices/EditPrice";
-import { getRetouchPrice } from "@/features/services/queries/get-retouch-prices";
+import { getRetouchPrice } from "@/app/(authenticated)/(admin)/dashboard/services/_queries/get-retouch-prices";
 import { RetouchPrice } from "@prisma/client";
+import EditRetouchPriceForm from "../../../_components/EditPrice";
 
 const EditRetouchPricePage = async ({
   params: { priceId, serviceId },
