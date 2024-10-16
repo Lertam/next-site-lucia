@@ -12,3 +12,9 @@ export const getRetouchPrices = async (
     orderBy: { weight: "desc" },
   });
 };
+
+export const getRetouchPrice = async (
+  priceId: string
+): Promise<RetouchPrice> => {
+  return prisma.retouchPrice.findUniqueOrThrow({ where: { id: priceId } });
+};

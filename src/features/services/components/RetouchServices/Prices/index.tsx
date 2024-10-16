@@ -21,7 +21,12 @@ const Prices: FC<{ serviceId: string; prices: RetouchPrice[] }> = ({
       <div className={"mt-4"}>
         {prices.length === 0 && <p className={"text-center mt-4"}>Нет цен</p>}
         {prices.map((price) => (
-          <p key={`pr-${price.id}`}>{price.id}</p>
+          <Link
+            href={`/dashboard/services/${serviceId}/prices/${price.id}`}
+            key={`pr-${price.id}`}
+          >
+            {price.id} - {price.weight}
+          </Link>
         ))}
       </div>
     </div>

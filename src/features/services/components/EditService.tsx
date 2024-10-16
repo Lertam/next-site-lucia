@@ -2,18 +2,17 @@
 import FileInput from "@/components/Forms/FileInput";
 import FormInput from "@/components/Forms/FormInput";
 import SubmitButton from "@/components/Forms/SubmitButton";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useState } from "react";
 import { useFormState } from "react-dom";
 import { editRetouchService } from "../actions/edit-retouch-service";
 import { RetouchService } from "@prisma/client";
-import { getRetouchService } from "../queries/get-retouch-services";
 import { deleteRetouchService } from "../actions/delete-retouch-service";
 
 const EditServiceForm: FC<{ id: string; service?: RetouchService }> = ({
   id,
   service,
 }) => {
-  const [form, setForm] = useState<
+  const [form] = useState<
     Omit<RetouchService, "image"> & { image?: string }
   >(
     service

@@ -8,7 +8,6 @@ const EditServicePage = async ({
 }: {
   params: { serviceId: string };
 }) => {
-  console.log(serviceId);
 
   let service: RetouchService | undefined;
   if (serviceId !== "add") {
