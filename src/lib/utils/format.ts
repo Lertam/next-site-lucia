@@ -1,0 +1,1 @@
+export const formatMoney = (num:number):string => new Intl.NumberFormat('ru-RU', {style: "decimal", currency: "RUB", notation: "standard"}).format(num) + ' руб.';
