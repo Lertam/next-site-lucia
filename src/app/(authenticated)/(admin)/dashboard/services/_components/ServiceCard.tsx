@@ -14,7 +14,7 @@ const RetouchServiceCard: FC<RetouchService & { selected?: boolean }> = ({
 
   return (
     <div
-      className={`flex flex-col items-center border border-foreground rounded-xl overflow-hidden${
+      className={`flex flex-col items-center justify-between border border-foreground rounded-xl overflow-hidden${
         selected ? " shadow-xl shadow-foreground" : " cursor-pointer"
       }`}
       onClick={() => {

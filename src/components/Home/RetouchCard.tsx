@@ -12,7 +12,11 @@ const RetouchCard = () => {
           "flex flex-col items-center justify-center gap-2 w-full h-full"
         }
       >
-        <CardButton text={"Заказать ретушь"} />
+        <CardButton
+          variant={"link"}
+          text={"Заказать ретушь"}
+          link={"/create-order"}
+        />
         <CardButton text={"Мои заказы"} />
         <CardButton text={"Правила"} />
       </div>
