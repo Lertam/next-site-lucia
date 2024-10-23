@@ -50,6 +50,7 @@ const RESOLUTIONS: Omit<RadioInputProps, "name">[] = [
 ];
 
 const Resolutions: FC = () => {
+  // TODO Подтягивать значение из последнего заказа
   return (
     <div className={"mt-4"}>
       <h4 className={"font-bold"}>Разрешение</h4>

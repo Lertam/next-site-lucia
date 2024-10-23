@@ -35,6 +35,7 @@ const FORMATS: Omit<RadioInputProps, "name">[] = [
 ];
 
 const Formats: FC = () => {
+  // TODO Подтягивать данные последнего заказа и уставлять по умолчанию
   return (
     <div className={"mt-4"}>
       <h4 className={"font-bold"}>Формат</h4>
