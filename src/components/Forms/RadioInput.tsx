@@ -22,8 +22,9 @@ const RadioInput: FC<
         value={value}
         ref={ref}
         {...inputProps}
+        className={"cursor-pointer"}
       />
-      <label htmlFor={id}>
+      <label htmlFor={id} className={"cursor-pointer"}>
         {text}
       </label>
     </div>

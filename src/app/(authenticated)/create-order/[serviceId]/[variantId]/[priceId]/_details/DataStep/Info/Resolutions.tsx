@@ -1,5 +1,6 @@
 import RadioInput, { RadioInputProps } from "@/components/Forms/RadioInput";
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
+import { FormFieldMode } from "..";
 
 const RESOLUTIONS: Omit<RadioInputProps, "name">[] = [
   {
@@ -49,10 +50,14 @@ const RESOLUTIONS: Omit<RadioInputProps, "name">[] = [
   },
 ];
 
-const Resolutions: FC = () => {
+const Resolutions: FC<{
+  mode: FormFieldMode;
+  resolution: string | undefined;
+  setResolution: Dispatch<SetStateAction<string | undefined>>;
+}> = ({ mode, resolution, setResolution }) => {
   // TODO Подтягивать значение из последнего заказа
   return (
-    <div className={"mt-4"}>
+    <div className={`mt-4${mode === FormFieldMode.hidden ? " hidden" : ""}`}>
       <h4 className={"font-bold"}>Разрешение</h4>
       <div
         className={"grid gap-4 grid-cols-2 sm:grid-cols-4 md:grid-cols-9 mt-4"}
@@ -62,7 +67,15 @@ const Resolutions: FC = () => {
             key={r.id}
             {...r}
             name={"resolution"}
-            inputProps={{ required: true }}
+            inputProps={{
+              required: true,
+              type: mode === FormFieldMode.hidden ? "hidden" : "radio",
+              value: resolution,
+              onChange: (ev) => {
+                if ((ev.target as HTMLInputElement).checked)
+                  setResolution(r.value);
+              },
+            }}
           />
         ))}
       </div>

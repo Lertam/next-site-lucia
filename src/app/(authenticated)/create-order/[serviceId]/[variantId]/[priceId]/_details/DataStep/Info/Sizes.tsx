@@ -1,16 +1,26 @@
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
+import { FormFieldMode } from "..";
 
-const Sizes: FC = () => {
+export type Size2D = { width: number; height: number };
+
+const Sizes: FC<{
+  mode: FormFieldMode;
+  size: Size2D;
+  setSize: Dispatch<SetStateAction<Size2D>>;
+}> = ({ mode, size, setSize }) => {
   return (
-    <div className={"mt-4"}>
+    <div className={`mt-4${mode === FormFieldMode.hidden ? " hidden" : ""}`}>
       <h4 className={"font-bold"}>Размер</h4>
       <div className={"flex gap-4 items-center"}>
         <div>
           <label>Ширина: </label>
           <input
-            type={"number"}
+            type={mode === FormFieldMode.hidden ? "hidden" : "number"}
             name={"width"}
-            defaultValue={20}
+            value={size.width}
+            onChange={(e) =>
+              setSize((s) => ({ ...s, width: Number(e.target.value) }))
+            }
             className={"w-14"}
             required
           />
@@ -19,9 +29,12 @@ const Sizes: FC = () => {
         <div>
           <label>Высота: </label>
           <input
-            type={"number"}
+            type={mode === FormFieldMode.hidden ? "hidden" : "number"}
             name={"height"}
-            defaultValue={30}
+            value={size.height}
+            onChange={(e) =>
+              setSize((s) => ({ ...s, height: Number(e.target.value) }))
+            }
             className={"w-14"}
             required
           />

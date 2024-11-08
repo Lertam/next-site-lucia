@@ -4,7 +4,7 @@ import { FC, PropsWithChildren } from "react";
 
 const CreateOrderLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className={"mt-4 relative"}>
+    <div className={"mt-4 relative grow"}>
       <h1 className={"text-center font-bold uppercase"}>Заказ ретуши</h1>
       <BalanceBlock />
       <BackLink />
@@ -13,4 +13,4 @@ const CreateOrderLayout: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default CreateOrderLayout
+export default CreateOrderLayout;

@@ -42,7 +42,7 @@ const FormInput: FC<{
       )}
       <input
         className={"border-[#b3b3b3] py-2 px-3"}
-        type={type}
+        type={type ? type : "text"}
         min={min}
         name={name}
         id={id}

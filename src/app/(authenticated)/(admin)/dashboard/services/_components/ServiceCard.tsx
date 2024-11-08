@@ -17,7 +17,8 @@ const RetouchServiceCard: FC<RetouchService & { selected?: boolean }> = ({
       className={`flex flex-col items-center justify-between border border-foreground rounded-xl overflow-hidden${
         selected ? " shadow-xl shadow-foreground" : " cursor-pointer"
       }`}
-      onClick={() => {
+      onClick={(ev) => {
+        ev.stopPropagation();
         if (!selected) router.push(`/dashboard/services/${id}`);
       }}
     >
@@ -30,6 +31,9 @@ const RetouchServiceCard: FC<RetouchService & { selected?: boolean }> = ({
             className={
               "p-2 border shadow-md shadow-foreground text-white bg-foreground border-none mt-4"
             }
+            onClick={(ev) => {
+              ev.stopPropagation();
+            }}
           >
             Редактировать
           </Link>

@@ -13,7 +13,7 @@ const RetouchVariantCard: FC<RetouchVariant> = ({
     <div
       className={`flex flex-col items-center border border-foreground rounded-xl max-w-40 overflow-hidden relative`}
     >
-      <img src={`/modules/services/images/${image}`} alt={title}/>
+      <img src={`/modules/services/images/${image}`} alt={title} />
       <div
         className={
           "p-2 flex flex-col items-center text-center h-full justify-between flex-1"
@@ -30,13 +30,15 @@ const RetouchVariantCard: FC<RetouchVariant> = ({
         </Link>
       </div>
 
-      <div
-        className={
-          "absolute top-1 z-10 right-1 bg-foreground text-white p-0.5 px-1 rounded-sm"
-        }
-      >
-        +{price}
-      </div>
+      {price > 0 && (
+        <div
+          className={
+            "absolute top-1 z-10 right-1 bg-foreground text-white p-0.5 px-1 rounded-sm"
+          }
+        >
+          +{price}
+        </div>
+      )}
     </div>
   );
 };

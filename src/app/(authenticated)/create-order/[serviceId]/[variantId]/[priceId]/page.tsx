@@ -17,7 +17,7 @@ const Retouchers = async ({
   const price = await getRetouchPrice(priceId);
 
   return (
-    <div className={"mt-4"}>
+    <div className={"mt-4 h-full pb-10"}>
       <h2>Шаг 4. Детали</h2>
       <Details service={service} variant={variant} price={price} />
     </div>
