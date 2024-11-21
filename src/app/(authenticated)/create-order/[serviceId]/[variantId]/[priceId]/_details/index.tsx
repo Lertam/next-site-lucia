@@ -1,6 +1,6 @@
 "use client";
 import { RetouchPrice, RetouchService, RetouchVariant } from "@prisma/client";
-import { FC, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useMemo, useState } from "react";
 import DataStep from "./DataStep";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -21,8 +21,23 @@ const Details: FC<{
   const params = useSearchParams();
   useEffect(() => {
     const step = Number(params.get("step"));
-    _setStep(step);
+    if(step < 2) _setStep(step);
   }, [params]);
+
+  const servicesBlock = useMemo<ReactNode>(
+    () => (
+      <div>
+        <h3>Выбранные услуги</h3>
+        <div>
+          <img src={`/modules/services/images/${variant.image}`} className={"w-32"}/>
+          <span>
+            {service.title}, {variant.title}, {price.title}
+          </span>
+        </div>
+      </div>
+    ),
+    []
+  );
 
   return (
     <form
@@ -39,7 +54,7 @@ const Details: FC<{
       <input type={"hidden"} name={"variantId"} value={variant.id} />
       <input type={"hidden"} name={"priceId"} value={price.id} />
 
-      <DataStep step={step} next={() => setStep(step + 1)} />
+      <DataStep step={step} next={() => setStep(step + 1)} servicesBlock={servicesBlock}/>
     </form>
   );
 };

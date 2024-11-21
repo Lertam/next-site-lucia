@@ -5,6 +5,7 @@ export type RadioInputProps = {
   name: string;
   text: string;
   value: string;
+  // onChange: () => void;
 };
 
 const RadioInput: FC<

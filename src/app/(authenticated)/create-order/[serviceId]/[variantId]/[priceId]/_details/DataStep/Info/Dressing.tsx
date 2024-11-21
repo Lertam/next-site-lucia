@@ -1,6 +1,6 @@
 "use client";
 import DragDrop from "@/components/Forms/DragDrop";
-import RadioInput from "@/components/Forms/RadioInput";
+import RadioInput, { RadioInputProps } from "@/components/Forms/RadioInput";
 import { Dispatch, FC, SetStateAction, useEffect } from "react";
 import { FormFieldMode } from "..";
 import { acceptImageFormats } from "../Files";
@@ -10,6 +10,25 @@ export enum DressingType {
   CUSTOM = "custom",
   RETOUCHER = "retoucher",
 }
+
+const DressingOptions: Omit<RadioInputProps, "name">[] = [
+  {
+    id: "dressingNone",
+    text: "Не переодевать",
+    value: DressingType.NONE,
+  },
+  {
+    id: "dressingCustom",
+    text: "Переодеть (прикрепить файл c одеждой) +100 руб.",
+    value: DressingType.CUSTOM,
+  },
+  {
+    id: "dressingRetoucher",
+    text: "Переодеть в наш вариант +200 руб.",
+    value: DressingType.RETOUCHER,
+  },
+];
+
 const Dressing: FC<{
   mode: FormFieldMode;
   value: DressingType | undefined;
@@ -39,48 +58,22 @@ const Dressing: FC<{
     >
       <h4 className={"font-bold"}>Переодевание</h4>
       <div className={"gap-6 flex flex-wrap mt-2"}>
-        <RadioInput
-          inputProps={{
-            required: true,
-            type: formMode === FormFieldMode.hidden ? "hidden" : "radio",
-            onChange: (ev) => {
-              if ((ev.target as HTMLInputElement).checked)
-                setValue(DressingType.NONE);
-            },
-          }}
-          name={"dressing"}
-          value={DressingType.NONE}
-          id={"dressingNone"}
-          text={"Не переодевать"}
-        />
-        <RadioInput
-          inputProps={{
-            required: true,
-            type: formMode === FormFieldMode.hidden ? "hidden" : "radio",
-            onChange: (ev) => {
-              if ((ev.target as HTMLInputElement).checked)
-                setValue(DressingType.CUSTOM);
-            },
-          }}
-          name={"dressing"}
-          value={DressingType.CUSTOM}
-          id={"dressingCustom"}
-          text={"Переодеть (прикрепить файл c одеждой) +100 руб."}
-        />
-        <RadioInput
-          inputProps={{
-            required: true,
-            type: formMode === FormFieldMode.hidden ? "hidden" : "radio",
-            onChange: (ev) => {
-              if ((ev.target as HTMLInputElement).checked)
-                setValue(DressingType.RETOUCHER);
-            },
-          }}
-          name={"dressing"}
-          value={DressingType.RETOUCHER}
-          id={"dressingRetoucher"}
-          text={"Переодеть в наш вариант +200 руб."}
-        />
+        {DressingOptions.map((d) => (
+          <RadioInput
+            key={`drs${d.id}`}
+            {...d}
+            name={"dressing"}
+            inputProps={{
+              required: true,
+              type: formMode === FormFieldMode.hidden ? "hidden" : "radio",
+              onChange: (ev) => {
+                if ((ev.target as HTMLInputElement).checked)
+                  setValue(d.value as DressingType);
+              },
+              value: value,
+            }}
+          />
+        ))}
       </div>
       {value === DressingType.CUSTOM && (
         <div className={"mt-4 w-64 m-auto min-h-32"}>

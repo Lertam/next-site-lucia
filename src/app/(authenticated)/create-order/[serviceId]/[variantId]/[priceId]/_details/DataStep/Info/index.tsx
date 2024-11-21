@@ -40,7 +40,6 @@ const OrderInfoBlock: FC<{ mode: FormFieldMode; next: () => void }> = ({
     return [false, "Далее"];
   }, [format, resolution, dressing, dressingFile]);
 
-  console.log("dr", dressing, dressingFile);
   return (
     <>
       <Name mode={mode} name={name} setName={setName} />

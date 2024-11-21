@@ -1,5 +1,5 @@
 import DragDrop from "@/components/Forms/DragDrop";
-import { FC, useMemo, useState } from "react";
+import { FC, ReactNode, useEffect, useMemo, useState } from "react";
 import { FormFieldMode } from ".";
 
 export const acceptImageFormats = [
@@ -23,37 +23,75 @@ const FilesStep: FC<{
     () => !!file1 || !!file2 || !!file3 || !!file4,
     [file1, file2, file3, file4]
   );
+
+  useEffect(() => {
+    console.log("Mount");
+    return () => {
+      console.log("Unmount");
+    };
+  }, []);
+
+  const FinalBlock = useMemo<ReactNode>(() => {
+    console.log(file1);
+    if (mode !== FormFieldMode.view) return <span>no</span>;
+    const previews = [file1, file2, file3, file4]
+      .filter((file) => !!file)
+      .map((file) => {
+        if (file.type.match(/image\/*/gi)) {
+          return URL.createObjectURL(file);
+        } else {
+          return "https://obeliski.ru/ymaxiProduct/billing2/php/modules/retouch/images/arhive.png";
+        }
+      });
+    return (
+      <div>
+        <h3>Прикрепленные файлы</h3>
+        <div className={`grid grid-cols-${previews.length} gap-4 w-96 h-32`}>
+          {previews.map((preview, ind) => (
+            <div
+              className={
+                "border flex justify-center bg-center bg-contain bg-no-repeat"
+              }
+              key={`p${ind}`}
+              style={{ backgroundImage: `url(${preview})` }}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }, [file1, file2, file3, file4, mode]);
+
   return (
     <>
       <div
         className={`grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 h-full md:h-1/2${
-          mode === FormFieldMode.hidden ? " hidden" : ""
+          mode !== FormFieldMode.input ? " hidden" : ""
         }`}
       >
         <DragDrop
-          hidden={mode === FormFieldMode.hidden}
+          hidden={mode !== FormFieldMode.input}
           select={setFile1}
           accept={acceptImageFormats}
         />
         <DragDrop
-          hidden={mode === FormFieldMode.hidden}
+          hidden={mode !== FormFieldMode.input}
           select={setFile2}
           accept={acceptImageFormats}
         />
         <DragDrop
-          hidden={mode === FormFieldMode.hidden}
+          hidden={mode !== FormFieldMode.input}
           select={setFile3}
           accept={acceptImageFormats}
         />
         <DragDrop
-          hidden={mode === FormFieldMode.hidden}
+          hidden={mode !== FormFieldMode.input}
           select={setFile4}
           accept={acceptImageFormats}
         />
       </div>
       <div
         className={`w-full text-center${
-          mode === FormFieldMode.hidden ? " hidden" : ""
+          mode !== FormFieldMode.input ? " hidden" : ""
         }`}
       >
         <button
@@ -61,7 +99,8 @@ const FilesStep: FC<{
             "bg-foreground text-white px-4 py-2 mt-4 w-full uppercase disabled:opacity-50"
           }
           disabled={!hasAnyOfFiles}
-          onClick={() => {
+          onClick={(ev) => {
+            ev.preventDefault();
             next();
           }}
           title={hasAnyOfFiles ? "Далее" : "Не выбрано ни одного файла"}
@@ -69,6 +108,7 @@ const FilesStep: FC<{
           Далее
         </button>
       </div>
+      {FinalBlock}
     </>
   );
 };
