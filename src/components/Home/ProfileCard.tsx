@@ -15,6 +15,7 @@ const ProfilePage = () => {
         <CardButton text={"Кабинет"} />
         <CardButton text={"Моя касса"} />
         <CardButton text={"Сообщения"} />
+        <CardButton text={"Админка"} link={"/dashboard"}/>
       </div>
     </CardWrapper>
   );

@@ -20,13 +20,13 @@ enum UserRole {
 }
 
 model User {
-  id String @id
-  sessions Session[]
-  login String @unique
-  email String @unique
+  id             String    @id
+  sessions       Session[]
+  login          String    @unique
+  email          String    @unique
   hashedPassword String
-  role UserRole @default(USER)
-  image String?
+  role           UserRole  @default(USER)
+  image          String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -35,18 +35,55 @@ model User {
 }
 
 model Session {
-  id String @id
+  id        String   @id
   expiresAt DateTime
-  userId String
-  user User @relation(references: [id], fields: [userId])
+  userId    String
+  user      User     @relation(references: [id], fields: [userId])
 }
 
 model PasswordResetToken {
-  userId String @id
-  user User @relation(fields: [userId], references: [id])
-  token String @unique
+  userId  String   @id
+  user    User     @relation(fields: [userId], references: [id])
+  token   String   @unique
   expires DateTime
-  used Boolean @default(false)
+  used    Boolean  @default(false)
 
   @@index(fields: [userId, token])
+}
+
+model RetouchService {
+  id          String @id
+  title       String
+  weight      Int    @default(0)
+  description String @default("")
+  image       String
+
+  prices RetouchPrice[]
+  variants RetouchVariant[]
+}
+
+model RetouchPrice {
+  id          String  @id
+  title       String
+  description String
+  price       Int
+  weight      Int     @default(0)
+  express     Boolean @default(false)
+
+  serviceId String
+  service   RetouchService @relation(fields: [serviceId], references: [id])
+}
+
+model RetouchVariant {
+  id String @id
+  title String
+  description String
+  weight Int @default(0)
+  price Int
+  image String
+  withText Boolean @default(false)
+  withFiles Boolean @default(false)
+
+  serviceId String
+  service RetouchService @relation(fields: [serviceId], references: [id])
 }

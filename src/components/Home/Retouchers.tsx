@@ -3,7 +3,7 @@ import { FC } from "react";
 
 const Retouchers = async () => {
   const retouchers = await getRetouchers();
-  console.log("Get retouchers", retouchers);
+
   if (!retouchers || retouchers.length === 0) return null;
   return (
     <div className={"mt-4 mb-8 hidden sm:block"}>
@@ -17,7 +17,7 @@ const Retouchers = async () => {
   );
 };
 
-const Retoucher: FC<RetoucherMeta> = ({ id, name, avatar }) => {
+const Retoucher: FC<RetoucherMeta> = ({ name, avatar }) => {
   return (
     <div className={"flex flex-col gap-1"}>
       <span
