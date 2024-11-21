@@ -1,6 +1,5 @@
 "use client";
 
-import FormCheckbox from "@/components/Forms/FormCheckbox";
 import FormInput from "@/components/Forms/FormInput";
 import SubmitButton from "@/components/Forms/SubmitButton";
 import { editRetouchPrice } from "@/app/(authenticated)/(admin)/dashboard/services/_actions/edit-retouch-price";
@@ -8,6 +7,7 @@ import { RetouchPrice } from "@prisma/client";
 import { FC } from "react";
 import { useFormState } from "react-dom";
 import { deleteRetouchPrice } from "../_actions/delete-retouch-price";
+import FormSwitch from "@/components/Forms/FormSwitch";
 
 const EditRetouchPriceForm: FC<{
   serviceId: string;
@@ -58,7 +58,7 @@ const EditRetouchPriceForm: FC<{
           defaultValue={price?.weight}
         />
         <div className={"flex justify-start ml-4 items-center h-min mt-4"}>
-          <FormCheckbox
+          <FormSwitch
             id={"express"}
             name={"express"}
             label={"Срочность"}

@@ -1,6 +1,5 @@
 "use client";
 
-import FormCheckbox from "@/components/Forms/FormCheckbox";
 import FormInput from "@/components/Forms/FormInput";
 import SubmitButton from "@/components/Forms/SubmitButton";
 import { RetouchVariant } from "@prisma/client";
@@ -9,6 +8,7 @@ import { useFormState } from "react-dom";
 import FileInput from "@/components/Forms/FileInput";
 import { editRetouchVariant } from "../_actions/edit-retouch-variant";
 import { deleteRetouchVariant } from "../_actions/delete-retouch-variant";
+import FormSwitch from "@/components/Forms/FormSwitch";
 
 const EditRetouchVariantForm: FC<{
   serviceId: string;
@@ -71,7 +71,7 @@ const EditRetouchVariantForm: FC<{
         />
 
         <div className={"flex justify-start ml-4 items-center h-min mt-4"}>
-          <FormCheckbox
+          <FormSwitch
             id={"withFiles"}
             name={"withFiles"}
             label={"Загрузка дополнительных файлов"}
@@ -80,7 +80,7 @@ const EditRetouchVariantForm: FC<{
           />
         </div>
         <div className={"flex justify-start ml-4 items-center h-min mt-4"}>
-          <FormCheckbox
+          <FormSwitch
             id={"withText"}
             name={"withText"}
             label={"Заполнение надписей"}
