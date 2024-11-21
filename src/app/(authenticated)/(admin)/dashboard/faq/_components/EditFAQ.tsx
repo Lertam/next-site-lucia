@@ -8,7 +8,7 @@ import FormInput from "@/components/Forms/FormInput";
 import RichTextEditor from "@/components/Forms/RichTextEditor";
 import FormSwitch from "@/components/Forms/FormSwitch";
 import SubmitButton from "@/components/Forms/SubmitButton";
-import { deleteRetouchPrice } from "../../services/_actions/delete-retouch-price";
+import { deleteQuestion } from "../_actions/delete-faq";
 
 const EditFAQForm: FC<{ question?: Faq }> = ({ question }) => {
   const [form] = useState<Faq>(
@@ -79,7 +79,7 @@ const EditFAQForm: FC<{ question?: Faq }> = ({ question }) => {
             onClick={(ev) => {
               ev.preventDefault();
               if (confirm("Вы уверены?")) {
-                deleteRetouchPrice(question.id);
+                deleteQuestion(question.id);
               }
             }}
           >

@@ -19,7 +19,9 @@ type EditQuestionState = {
 
 const EditQuestionSchema = z.object({
   questionId: z.string(),
-  question: z.string({ message: "Укажите вопрос" }),
+  question: z
+    .string({ message: "Укажите вопрос" })
+    .min(10, "Вопрос должен быть длинее 10 символов"),
   answer: z.string({ message: "Укажите ответ" }),
   weight: z.coerce.number({ message: "Укажите вес" }),
   hidden: z.coerce.boolean(),
@@ -49,7 +51,7 @@ export const editQuestion = async (
     });
   }
 
-  console.log("edit", parsedInput)
+  console.log("edit", parsedInput);
   if (parsedInput.data.questionId === "add") {
     // Создаем услугу
     question = await prisma.faq.create({

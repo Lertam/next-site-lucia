@@ -22,7 +22,8 @@ const FAQPage = async () => {
 
       {questions.map((q) => (
         <p key={`faq-${q.id}`}>
-          #{q.id} {q.question}
+          #{q.id} {q.question} -{" "}
+          <Link href={`/dashboard/faq/${q.id}`}>Edit</Link>
         </p>
       ))}
     </div>
