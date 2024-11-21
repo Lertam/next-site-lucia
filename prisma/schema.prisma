@@ -87,3 +87,11 @@ model RetouchVariant {
   serviceId String
   service RetouchService @relation(fields: [serviceId], references: [id])
 }
+
+model Faq {
+  id String @id
+  question String
+  answer String
+  weight Int @default(0)
+  hidden Boolean @default(false)
+}

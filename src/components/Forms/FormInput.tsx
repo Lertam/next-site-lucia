@@ -19,6 +19,7 @@ const FormInput: FC<{
   defaultValue?: string | number;
   value?: string | number;
   onChange?: (ev: ChangeEvent<HTMLInputElement>) => void;
+  inline?: boolean;
 }> = ({
   label,
   type,
@@ -32,16 +33,17 @@ const FormInput: FC<{
   defaultValue,
   value,
   onChange,
+  inline,
 }) => {
   return (
-    <div className={"flex flex-col mb-4"}>
+    <div className={`flex ${!inline ? "flex-col" : " items-center gap-4"} mb-4`}>
       {typeof label === "string" ? (
         <label htmlFor={id}>{label}</label>
       ) : (
         <>{label}</>
       )}
       <input
-        className={"border-[#b3b3b3] py-2 px-3"}
+        className={"border-[#b3b3b3] py-2 px-3" + (inline ? " max-w-20" : "")}
         type={type ? type : "text"}
         min={min}
         name={name}
