@@ -30,7 +30,7 @@ const SurveysPage = async (props: {
         </Link>
       </div>
       <div className={"pb-4"}>
-        <Search placeholder={"Поиск"} />
+        <Search placeholder={"Поиск по названию"} />
       </div>
       <div className={"flex flex-col gap-2"}>
         {surveys.length === 0 && (

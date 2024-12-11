@@ -4,9 +4,10 @@ import { prisma } from "@/lib/prisma";
 const ITEMS_PER_PAGE = 10;
 
 export const getSurveys = async (page: number = 1, query: string = "") => {
+  console.log(page, query)
   return prisma.survey.findMany({
     where: {
-      text: { contains: query },
+      title: { contains: query, mode: "insensitive" },
     },
     orderBy: {
       created: "desc",
@@ -14,8 +15,8 @@ export const getSurveys = async (page: number = 1, query: string = "") => {
     include: {
       variants: {
         include: {
-          votes: true
-        }
+          votes: true,
+        },
       },
     },
     take: ITEMS_PER_PAGE,
@@ -26,8 +27,12 @@ export const getSurveys = async (page: number = 1, query: string = "") => {
 export const getTotalSurveysPages = async (query: string = "") => {
   const surveysCount = await prisma.survey.count({
     where: {
-      text: { contains: query },
+      title: { contains: query },
     },
   });
   return Math.ceil(surveysCount / ITEMS_PER_PAGE);
+};
+
+export const getSurvey = async (id: string) => {
+  return prisma.survey.findUnique({ where: { id } });
 };
