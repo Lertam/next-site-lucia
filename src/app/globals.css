@@ -41,3 +41,10 @@ body {
     text-wrap: balance;
   }
 }
+
+
+ol {
+  margin: initial;
+  padding-inline-start: 40px;
+  list-style: decimal;
+}

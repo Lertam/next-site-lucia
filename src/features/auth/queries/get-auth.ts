@@ -34,7 +34,7 @@ export const getAuth = cache(
           sessionCookie.attributes
         );
       }
-    } catch (ex) {}
+    } catch {}
     return result;
   }
 );
