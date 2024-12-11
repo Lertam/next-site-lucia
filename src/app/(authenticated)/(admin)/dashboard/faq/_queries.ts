@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 export const getQuestions = async (): Promise<Faq[]> => {
   return prisma.faq.findMany({
     orderBy: {
-      id: "desc",
+      weight: "desc",
     },
   });
 };
