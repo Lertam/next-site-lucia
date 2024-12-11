@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -94,4 +95,14 @@ model Faq {
   answer String
   weight Int @default(0)
   hidden Boolean @default(false)
+}
+
+model News {
+  id String @id
+  title String
+  content String @db.Text
+  image String?
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+  published Boolean @default(false)
 }

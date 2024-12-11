@@ -12,7 +12,7 @@ const FormSwitch: FC<{
       <label className={"inline-flex items-center cursor-pointer"}>
         <input
           type={"checkbox"}
-          value={""}
+          value={"checked"}
           className={"sr-only peer"}
           defaultChecked={checked}
           id={id}

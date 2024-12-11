@@ -13,7 +13,10 @@ const ProtectedDashboardPage = () => {
       <div>
         <h1 className={"font-bold"}>Остальное</h1>
 
-        <Link href={"/dashboard/faq"}>Вопросы и ответы</Link>
+        <div className={"flex flex-col"}>
+          <Link href={"/dashboard/faq"}>Вопросы и ответы</Link>
+          <Link href={"/dashboard/news"}>Новости</Link>
+        </div>
       </div>
     </>
   );
