@@ -20,6 +20,7 @@ const FormInput: FC<{
   value?: string | number;
   onChange?: (ev: ChangeEvent<HTMLInputElement>) => void;
   inline?: boolean;
+  helper?: string;
 }> = ({
   label,
   type,
@@ -34,9 +35,12 @@ const FormInput: FC<{
   value,
   onChange,
   inline,
+  helper,
 }) => {
   return (
-    <div className={`flex ${!inline ? "flex-col" : " items-center gap-4"} mb-4`}>
+    <div
+      className={`flex ${!inline ? "flex-col" : " items-center gap-4"} mb-4`}
+    >
       {typeof label === "string" ? (
         <label htmlFor={id}>{label}</label>
       ) : (
@@ -55,6 +59,7 @@ const FormInput: FC<{
         value={value ? value : undefined}
         onChange={value && onChange ? onChange : undefined}
       />
+      {helper && <span className={"text-xs text-gray-500"}>{helper}</span>}
       {error && error.length > 0 && (
         <p className={"text-red-500 text-sm"}>{error[0]}</p>
       )}

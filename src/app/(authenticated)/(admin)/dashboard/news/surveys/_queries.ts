@@ -14,8 +14,8 @@ export const getSurveys = async (page: number = 1, query: string = "") => {
     include: {
       variants: {
         include: {
-          votes: true
-        }
+          votes: true,
+        },
       },
     },
     take: ITEMS_PER_PAGE,
@@ -30,4 +30,8 @@ export const getTotalSurveysPages = async (query: string = "") => {
     },
   });
   return Math.ceil(surveysCount / ITEMS_PER_PAGE);
+};
+
+export const getSurvey = async (id: string) => {
+  return prisma.survey.findUnique({ where: { id } });
 };

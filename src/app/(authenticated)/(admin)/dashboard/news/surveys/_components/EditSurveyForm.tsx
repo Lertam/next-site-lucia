@@ -39,8 +39,8 @@ const EditSurveyForm: FC<{ survey?: Survey }> = ({ survey }) => {
         name={"title"}
         error={state.errors?.title}
         defaultValue={form.title}
+        helper={"Для быстрого поиска в админке"}
       />
-      <span>Для быстрого поиска</span>
 
       <RichTextEditor
         id={"text"}
