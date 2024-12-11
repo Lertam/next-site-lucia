@@ -14,7 +14,7 @@ const EditNewsPage = async ({
   return (
     <div className={"relative mt-4"}>
       <h1 className={"text-center font-bold uppercase"}>
-        Редактирование вопроса
+        Редактирование новости
       </h1>
       <BackLink href={"/dashboard/news"} />
       <EditNewsForm newsItem={newsItem} />
