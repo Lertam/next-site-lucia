@@ -30,3 +30,12 @@ export const getNewsTotalPages = async (query: string = "") => {
   });
   return Math.ceil(totalNews / 9);
 };
+
+export const getNewsItem = async (id: string) => {
+  // TODO Проверка ролей
+  return prisma.news.findUnique({
+    where: {
+      id,
+    },
+  });
+};
