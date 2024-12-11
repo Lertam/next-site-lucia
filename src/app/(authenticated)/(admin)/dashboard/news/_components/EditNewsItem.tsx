@@ -9,6 +9,7 @@ import FormSwitch from "@/components/Forms/FormSwitch";
 import SubmitButton from "@/components/Forms/SubmitButton";
 import { editNewsItem } from "../_actions/edit-news";
 import { deleteNews } from "../_actions/delete-news";
+import FileInput from "@/components/Forms/FileInput";
 
 const EditNewsForm: FC<{ newsItem?: News }> = ({ newsItem }) => {
   const [form] = useState<News>(
@@ -48,6 +49,14 @@ const EditNewsForm: FC<{ newsItem?: News }> = ({ newsItem }) => {
         name={"content"}
         value={form.content}
         error={state.errors?.content}
+      />
+      <FileInput
+        id={"image"}
+        label={"Файл для витрины"}
+        name={"image"}
+        inputProps={{ accept: "image/jpeg,image/png,image/bmp,image/webp" }}
+        error={state.errors?.image}
+        value={form.image ? `/images/news/${form.image}` : undefined}
       />
       <div
         className={
