@@ -9,7 +9,7 @@ const NewsPage = async ({
   const node = await getNewsItem(newsId);
   if (!node) return <span>Новость не найдена</span>;
   return (
-    <div className={"pt-10"}>
+    <div className={"pt-10 mt-4 relative"}>
       <BackLink href={"/news"} />
       <h1 className={"font-bold text-2xl mb-10"}>{node.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: node.content }} />
