@@ -1,8 +1,7 @@
 import BackLink from "@/components/Common/BackLink";
 import { getQuestions } from "./_queries";
 import Link from "next/link";
-import { Faq } from "@prisma/client";
-import { FC } from "react";
+import Question from "./_components/Question";
 
 const FAQPage = async () => {
   const questions = await getQuestions();
@@ -25,27 +24,6 @@ const FAQPage = async () => {
         {questions.map((q) => (
           <Question key={`faq-${q.id}`} {...q} />
         ))}
-      </div>
-    </div>
-  );
-};
-
-const Question: FC<Faq> = ({ id, question, weight }) => {
-  return (
-    <div
-      className={
-        "flex justify-between items-center border border-t-0 border-black p-4 first:border-t"
-      }
-    >
-      <span className={"trancate"}>{question}</span>
-      <div className={"flex gap-4 items-center"}>
-        <span>{weight}</span>
-        <Link
-          href={`/dashboard/faq/${id}`}
-          className={"px-4 py-2 bg-foreground text-white"}
-        >
-          Редактировать
-        </Link>
       </div>
     </div>
   );
