@@ -1,7 +1,7 @@
 "use client";
 
-import { Survey } from "@prisma/client";
-import { FC, useState } from "react";
+import { Survey, SurveyVariant } from "@prisma/client";
+import { FC, useActionState, useState } from "react";
 import { useFormState } from "react-dom";
 import RichTextEditor from "@/components/Forms/RichTextEditor";
 import FormSwitch from "@/components/Forms/FormSwitch";
@@ -9,9 +9,12 @@ import SubmitButton from "@/components/Forms/SubmitButton";
 import { editSurvey } from "../_actions/edit-survey";
 import { deleteSurvey } from "../_actions/delete-survey";
 import FormInput from "@/components/Forms/FormInput";
+import VariantsEdit from "./VariantsEdit";
 
-const EditSurveyForm: FC<{ survey?: Survey }> = ({ survey }) => {
-  const [form] = useState<Survey>(
+const EditSurveyForm: FC<{
+  survey?: Survey & { variants: SurveyVariant[] };
+}> = ({ survey }) => {
+  const [form] = useState<Survey & { variants: SurveyVariant[] }>(
     survey
       ? survey
       : {
@@ -20,13 +23,39 @@ const EditSurveyForm: FC<{ survey?: Survey }> = ({ survey }) => {
           text: "",
           created: new Date(),
           finished: false,
+          variants: [],
         }
   );
 
   const [state, action] = useFormState(editSurvey, { ok: false });
 
+  if (!survey) {
+    return <span>Опрос не найден</span>;
+  }
+
   return (
-    <form className={"mt-4"} action={action}>
+    <form
+      className={"mt-4"}
+      action={(formData) => {
+        const variantIds = formData.getAll("variants[][id]");
+        const variantTexts = formData.getAll("variants[][text]");
+        const variants = variantIds.map((id, ind) => ({
+          id,
+          text: variantTexts[ind],
+        }));
+        console.log('asd', variantIds, variantTexts)
+
+        formData.append("variants", JSON.stringify(variants));
+        console.log(formData.get("variants"));
+        console.log(
+          "form.variants",
+          formData.getAll("variants[][id]"),
+          form.variants
+        );
+
+        action(formData);
+      }}
+    >
       <input
         type={"hidden"}
         name={"surveyId"}
@@ -63,6 +92,7 @@ const EditSurveyForm: FC<{ survey?: Survey }> = ({ survey }) => {
           error={state.errors?.finished}
         />
       </div>
+      <VariantsEdit surveyId={survey.id} variants={survey.variants} />
       <div className={"flex justify-center"}>
         <SubmitButton text={"Сохранить"} loadingText={"Сохраняем"} />
         {survey && (

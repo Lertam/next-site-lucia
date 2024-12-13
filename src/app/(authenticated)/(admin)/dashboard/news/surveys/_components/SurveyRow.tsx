@@ -7,7 +7,6 @@ const SurveyRow: FC<
   Survey & { variants: Array<SurveyVariant & { votes: SurveyVote[] }> }
 > = ({ id, title, finished, variants }) => {
   // TODO Покаывать количество голосов
-  console.log(variants);
   return (
     <div
       className={
@@ -17,7 +16,8 @@ const SurveyRow: FC<
       <span className={"trancate"}>{title}</span>
 
       <div className={"flex gap-4 items-center"}>
-        {(finished || true) && (
+        <span>Варианты ({variants.length})</span>
+        {finished && (
           <CheckCircleIcon className={"w-10 h-10 text-foreground"} />
         )}
         <Link
