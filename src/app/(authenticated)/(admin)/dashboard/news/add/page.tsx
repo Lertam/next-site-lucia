@@ -1,6 +1,10 @@
 import BackLink from "@/components/Common/BackLink";
 import EditNewsForm from "../_components/EditNewsItem";
 
+export const metadata = {
+  title: "Создание новости",
+};
+
 const AddNewsPage = async () => {
   return (
     <div className={"relative mt-4"}>

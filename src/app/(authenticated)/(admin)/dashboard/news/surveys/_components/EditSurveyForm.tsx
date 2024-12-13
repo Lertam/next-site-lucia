@@ -1,7 +1,7 @@
 "use client";
 
 import { Survey, SurveyVariant } from "@prisma/client";
-import { FC, useActionState, useState } from "react";
+import { FC, useState } from "react";
 import { useFormState } from "react-dom";
 import RichTextEditor from "@/components/Forms/RichTextEditor";
 import FormSwitch from "@/components/Forms/FormSwitch";
@@ -29,10 +29,6 @@ const EditSurveyForm: FC<{
 
   const [state, action] = useFormState(editSurvey, { ok: false });
 
-  if (!survey) {
-    return <span>Опрос не найден</span>;
-  }
-
   return (
     <form
       className={"mt-4"}
@@ -43,7 +39,7 @@ const EditSurveyForm: FC<{
           id,
           text: variantTexts[ind],
         }));
-        console.log('asd', variantIds, variantTexts)
+        console.log("asd", variantIds, variantTexts);
 
         formData.append("variants", JSON.stringify(variants));
         console.log(formData.get("variants"));
@@ -92,7 +88,9 @@ const EditSurveyForm: FC<{
           error={state.errors?.finished}
         />
       </div>
-      <VariantsEdit surveyId={survey.id} variants={survey.variants} />
+      {survey && (
+        <VariantsEdit surveyId={survey.id} variants={survey.variants} />
+      )}
       <div className={"flex justify-center"}>
         <SubmitButton text={"Сохранить"} loadingText={"Сохраняем"} />
         {survey && (

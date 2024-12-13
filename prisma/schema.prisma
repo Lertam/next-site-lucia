@@ -106,7 +106,11 @@ model News {
   created   DateTime @default(now())
   updated   DateTime @updatedAt
   published Boolean  @default(false)
+
+  surveyId String?
+  survey Survey? @relation(fields: [surveyId], references: [id])
 }
+
 
 model Survey {
   id       String   @id
@@ -114,6 +118,8 @@ model Survey {
   text     String
   created  DateTime @default(now())
   finished Boolean  @default(false)
+
+  news News[]
 
   variants SurveyVariant[]
 }

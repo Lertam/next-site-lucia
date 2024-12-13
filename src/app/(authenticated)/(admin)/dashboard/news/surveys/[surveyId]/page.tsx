@@ -2,6 +2,10 @@ import BackLink from "@/components/Common/BackLink";
 import EditSurveyForm from "../_components/EditSurveyForm";
 import { getSurvey } from "../_queries";
 
+export const metadata = {
+  title: "Редактирование опроса",
+};
+
 const EditSurveyPage = async ({
   params: { surveyId },
 }: {

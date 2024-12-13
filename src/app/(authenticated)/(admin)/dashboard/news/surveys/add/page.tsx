@@ -1,6 +1,10 @@
 import BackLink from "@/components/Common/BackLink";
 import EditSurveyForm from "../_components/EditSurveyForm";
 
+export const metadata = {
+  title:"Создание опроса",
+}
+
 const AddSurveyPage = async () => {
   return (
     <div className={"relative mt-4"}>

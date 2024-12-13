@@ -2,6 +2,9 @@ import BackLink from "@/components/Common/BackLink";
 import { getNewsItem } from "../_queries";
 import EditNewsForm from "../_components/EditNewsItem";
 
+export const metadata = {
+  title: "Редактирование новости",
+};
 const EditNewsPage = async ({
   params: { newsId },
 }: {

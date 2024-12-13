@@ -1,6 +1,6 @@
 "use client";
 
-import { News } from "@prisma/client";
+import { News, Survey } from "@prisma/client";
 import { FC, useState } from "react";
 import { useFormState } from "react-dom";
 import FormInput from "@/components/Forms/FormInput";
@@ -10,8 +10,11 @@ import SubmitButton from "@/components/Forms/SubmitButton";
 import { editNewsItem } from "../_actions/edit-news";
 import { deleteNews } from "../_actions/delete-news";
 import FileInput from "@/components/Forms/FileInput";
+import SurveyForm from "./SurveyForm";
 
-const EditNewsForm: FC<{ newsItem?: News }> = ({ newsItem }) => {
+const EditNewsForm: FC<{ newsItem?: News & { survey: Survey | null } }> = ({
+  newsItem,
+}) => {
   const [form] = useState<News>(
     newsItem
       ? newsItem
@@ -23,6 +26,7 @@ const EditNewsForm: FC<{ newsItem?: News }> = ({ newsItem }) => {
           created: new Date(),
           updated: new Date(),
           published: false,
+          surveyId: null,
         }
   );
 
@@ -71,6 +75,7 @@ const EditNewsForm: FC<{ newsItem?: News }> = ({ newsItem }) => {
           error={state.errors?.published}
         />
       </div>
+      <SurveyForm survey={newsItem?.survey} newsId={form.id} />
       <div className={"flex justify-center"}>
         <SubmitButton text={"Сохранить"} loadingText={"Сохраняем"} />
         {newsItem && (

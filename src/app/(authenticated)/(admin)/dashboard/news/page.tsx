@@ -5,6 +5,10 @@ import NewsItem from "./_components/NewsItem";
 import Search from "./_components/Search";
 import Pagination from "./_components/Pagination";
 
+export const metadata = {
+  title: "Новости",
+};
+
 const NewsPage = async (props: {
   searchParams?: Promise<{ query?: string; page?: string }>;
 }) => {
