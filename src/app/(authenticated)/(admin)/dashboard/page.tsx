@@ -19,6 +19,16 @@ const ProtectedDashboardPage = () => {
             <Link href={"/dashboard/news/surveys"}>Опросы</Link>
           </div>
         </div>
+
+        <div>
+          <h1 className={"font-bold"}>Магазин</h1>
+
+          <div className={"flex flex-col"}>
+            <Link href={"/dashboard/shop/categories"}>Категории</Link>
+            <Link href={"/dashboard/shop/items"}>Картинки</Link>
+          </div>
+        </div>
+
         <div>
           <h1 className={"font-bold"}>Остальное</h1>
 
