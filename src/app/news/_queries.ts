@@ -93,3 +93,14 @@ export const getUserSurveyVote = async (
     },
   });
 };
+
+export const getNewsComments = async (newsId: string) => {
+  return prisma.newsComment.findMany({
+    where: {
+      newsId,
+    },
+    include: {
+      user: true,
+    },
+  });
+};
