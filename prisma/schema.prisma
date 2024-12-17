@@ -157,3 +157,23 @@ model NewsComment {
   text    String
   created DateTime @default(now())
 }
+
+model ShopItem {
+  id      String   @id
+  name    String
+  preview String
+  source  String
+  created DateTime @default(now())
+
+  data Json
+
+  categoryId String?
+  category   ShopCategory? @relation(fields: [categoryId], references: [id])
+}
+
+model ShopCategory {
+  id   String @id
+  name String
+
+  items ShopItem[]
+}
