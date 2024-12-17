@@ -1,14 +1,13 @@
 "use client";
 
-import { useFormState } from "react-dom";
 import { resetPasswordPassword } from "../actions/reset-password";
-import { FC, useEffect } from "react";
+import { FC, useActionState, useEffect } from "react";
 import FormInput from "@/components/Forms/FormInput";
 import SubmitButton from "@/components/Forms/SubmitButton";
 import { useRouter } from "next/navigation";
 
 const ResetPasswordFormPassword: FC<{ token: string }> = ({ token }) => {
-  const [state, action] = useFormState(resetPasswordPassword, {
+  const [state, action] = useActionState(resetPasswordPassword, {
     errors: undefined,
     ok: false,
   });

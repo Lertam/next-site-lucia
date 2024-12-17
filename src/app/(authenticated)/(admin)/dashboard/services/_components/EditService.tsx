@@ -2,8 +2,7 @@
 import FileInput from "@/components/Forms/FileInput";
 import FormInput from "@/components/Forms/FormInput";
 import SubmitButton from "@/components/Forms/SubmitButton";
-import { FC, useState } from "react";
-import { useFormState } from "react-dom";
+import { FC, useActionState, useState } from "react";
 import { RetouchService } from "@prisma/client";
 import { editRetouchService } from "../_actions/edit-retouch-service";
 import { deleteRetouchService } from "../_actions/delete-retouch-service";
@@ -21,7 +20,7 @@ const EditServiceForm: FC<{ service?: RetouchService }> = ({ service }) => {
         }
   );
 
-  const [state, action] = useFormState(editRetouchService, { ok: false });
+  const [state, action] = useActionState(editRetouchService, { ok: false });
   return (
     <form className={"mt-4"} action={action}>
       <input
