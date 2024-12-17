@@ -5,7 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -32,6 +33,8 @@ model User {
   updatedAt DateTime @updatedAt
 
   passwordResetToken PasswordResetToken[]
+  SurveyVote         SurveyVote[]
+  comments           NewsComment[]
 }
 
 model Session {
@@ -58,7 +61,7 @@ model RetouchService {
   description String @default("")
   image       String
 
-  prices RetouchPrice[]
+  prices   RetouchPrice[]
   variants RetouchVariant[]
 }
 
@@ -75,23 +78,82 @@ model RetouchPrice {
 }
 
 model RetouchVariant {
-  id String @id
-  title String
+  id          String  @id
+  title       String
   description String
-  weight Int @default(0)
-  price Int
-  image String
-  withText Boolean @default(false)
-  withFiles Boolean @default(false)
+  weight      Int     @default(0)
+  price       Int
+  image       String
+  withText    Boolean @default(false)
+  withFiles   Boolean @default(false)
 
   serviceId String
-  service RetouchService @relation(fields: [serviceId], references: [id])
+  service   RetouchService @relation(fields: [serviceId], references: [id])
 }
 
 model Faq {
-  id String @id
+  id       String  @id
   question String
-  answer String
-  weight Int @default(0)
-  hidden Boolean @default(false)
+  answer   String
+  weight   Int     @default(0)
+  hidden   Boolean @default(false)
+}
+
+model News {
+  id        String   @id
+  title     String
+  content   String   @db.Text
+  image     String?
+  created   DateTime @default(now())
+  updated   DateTime @updatedAt
+  published Boolean  @default(false)
+
+  surveyId String?
+  survey   Survey? @relation(fields: [surveyId], references: [id])
+
+  comments NewsComment[]
+}
+
+model Survey {
+  id       String   @id
+  title    String   @default("")
+  text     String
+  created  DateTime @default(now())
+  finished Boolean  @default(false)
+
+  news News[]
+
+  variants SurveyVariant[]
+}
+
+model SurveyVariant {
+  id   String @id
+  text String
+
+  surveyId String
+  survey   Survey @relation(fields: [surveyId], references: [id])
+
+  votes SurveyVote[]
+}
+
+model SurveyVote {
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  variantId String
+  variant   SurveyVariant @relation(fields: [variantId], references: [id])
+
+  @@id([userId, variantId])
+}
+
+model NewsComment {
+  id     String @id
+  newsId String
+  news   News   @relation(fields: [newsId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  text    String
+  created DateTime @default(now())
 }

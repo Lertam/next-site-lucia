@@ -23,6 +23,7 @@ type RetouchServiceEditForm = {
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
+  "image/bmp",
   "image/png",
   "image/webp",
 ];
