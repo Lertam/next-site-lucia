@@ -7,10 +7,11 @@ export const metadata = {
 };
 
 const EditSurveyPage = async ({
-  params: { surveyId },
+  params,
 }: {
-  params: { surveyId: string };
+  params: Promise<{ surveyId: string }>;
 }) => {
+  const { surveyId } = await params;
   const survey = await getSurvey(surveyId);
   if (!survey) {
     return <span>Новость не найдена</span>;

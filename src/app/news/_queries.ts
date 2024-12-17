@@ -1,5 +1,7 @@
 "use server";
+import { getAuth } from "@/features/auth/queries/get-auth";
 import { prisma } from "@/lib/prisma";
+import { Survey, SurveyVariant, SurveyVote } from "@prisma/client";
 
 export const getNewsList = async (page: number = 1, query: string = "") => {
   // TODO Проверка ролей
@@ -36,6 +38,58 @@ export const getNewsItem = async (id: string) => {
   return prisma.news.findUnique({
     where: {
       id,
+    },
+  });
+};
+
+export const getSurveyVariants = async (
+  surveyId: string
+): Promise<Array<SurveyVariant & { votes: SurveyVote[] }>> => {
+  return prisma.surveyVariant.findMany({
+    where: { surveyId },
+    include: { votes: true },
+  });
+};
+
+export const getSurvey = async (
+  surveyId: string
+): Promise<
+  | (Survey & {
+      variants: Array<
+        SurveyVariant & {
+          votes: SurveyVote[];
+        }
+      >;
+    })
+  | null
+> => {
+  return prisma.survey.findUnique({
+    where: {
+      id: surveyId,
+    },
+    include: {
+      variants: {
+        include: {
+          votes: true,
+        },
+      },
+    },
+  });
+};
+
+export const getUserSurveyVote = async (
+  surveyId: string
+): Promise<SurveyVote | null> => {
+  const { user } = await getAuth();
+  if (!user) {
+    return null;
+  }
+  return prisma.surveyVote.findFirst({
+    where: {
+      variant: {
+        surveyId: surveyId,
+      },
+      userId: user.id,
     },
   });
 };

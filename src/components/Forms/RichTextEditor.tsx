@@ -1,8 +1,8 @@
 "use client";
 
 import { FC, ReactNode, useEffect, useRef, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import ReactQuill from "react-quill-new";
+import "react-quill-new/dist/quill.snow.css";
 import "./RichTextStyles.css";
 
 const modules = {
@@ -26,6 +26,7 @@ const modules = {
 };
 
 const formats = [
+  "bullet",
   "header",
   "font",
   "size",
@@ -35,7 +36,6 @@ const formats = [
   "strike",
   "blockquote",
   "list",
-  "bullet",
   "indent",
   "link",
   "image",

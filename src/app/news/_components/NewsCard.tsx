@@ -2,7 +2,14 @@ import { News } from "@prisma/client";
 import Link from "next/link";
 import { FC } from "react";
 
-const NewsCard: FC<News> = ({ id, title, image, content, created }) => {
+const NewsCard: FC<News> = ({
+  id,
+  title,
+  image,
+  content,
+  created,
+  published,
+}) => {
   return (
     <div
       className={"relative h-80 bg-center bg-contain"}
@@ -16,16 +23,28 @@ const NewsCard: FC<News> = ({ id, title, image, content, created }) => {
       }}
     >
       <div
-        className={"flex flex-grow self-end items-center justify-stretch p-4 relative h-48"}
+        className={
+          "flex flex-grow self-end items-center justify-stretch p-4 relative h-48"
+        }
       >
-        <h2 className={"text-white mt-auto text-shadow-lg shadow-gray-600 text-xl"}>{title}</h2>
+        <h2
+          className={
+            "text-white mt-auto text-shadow-lg shadow-gray-600 text-xl"
+          }
+        >
+          {title}
+        </h2>
       </div>
       <div className={"absolute bg-background bottom-0 w-full"}>
         <div
           className={"h-20 p-4 truncate text-wrap text-sm"}
           dangerouslySetInnerHTML={{ __html: content }}
         ></div>
-        <div className={"bg-white p-2 flex items-start justify-between"}>
+        <div
+          className={`p-2 flex items-start justify-between ${
+            published ? "bg-white" : "bg-red-300"
+          }`}
+        >
           <Link
             href={`/news/${id}`}
             className={

@@ -55,5 +55,5 @@ export const getNewsCount = async (query?: string) => {
 };
 
 export const getNewsItem = async (id: string) => {
-  return prisma.news.findUnique({ where: { id }, include: { survey: true } });
+  return prisma.news.findUnique({ where: { id } });
 };

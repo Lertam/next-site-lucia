@@ -13,6 +13,7 @@ const VariantsEdit: FC<{ variants: SurveyVariant[]; surveyId: string }> = ({
   surveyId,
   variants,
 }) => {
+  // TODO Добавление вариантов
   const [state, dispatch] = useReducer(
     (state: State, action: Action): State => {
       switch (action.type) {

@@ -16,7 +16,7 @@ const SurveyRow: FC<
       <span className={"trancate"}>{title}</span>
 
       <div className={"flex gap-4 items-center"}>
-        <span>Варианты ({variants.length})</span>
+        <span>Варианты - {variants.length}</span>
         {finished && (
           <CheckCircleIcon className={"w-10 h-10 text-foreground"} />
         )}

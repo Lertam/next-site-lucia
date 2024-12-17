@@ -18,6 +18,8 @@ const NewsPage = async (props: {
 
   const newsItems = await getNewsList(currentPage, query);
   const totalNewsPages = await getNewsCount(query);
+  // TODO Добавление конкурса
+  // TODO Добавление магазина
   return (
     <div className={"h-full w-full m-auto flex flex-col"}>
       <div className={"relative my-4"}>

@@ -1,8 +1,7 @@
 "use client";
 
 import { Survey, SurveyVariant } from "@prisma/client";
-import { FC, useState } from "react";
-import { useFormState } from "react-dom";
+import { FC, useActionState, useState } from "react";
 import RichTextEditor from "@/components/Forms/RichTextEditor";
 import FormSwitch from "@/components/Forms/FormSwitch";
 import SubmitButton from "@/components/Forms/SubmitButton";
@@ -27,7 +26,7 @@ const EditSurveyForm: FC<{
         }
   );
 
-  const [state, action] = useFormState(editSurvey, { ok: false });
+  const [state, action] = useActionState(editSurvey, { ok: false });
 
   return (
     <form
@@ -39,16 +38,8 @@ const EditSurveyForm: FC<{
           id,
           text: variantTexts[ind],
         }));
-        console.log("asd", variantIds, variantTexts);
 
         formData.append("variants", JSON.stringify(variants));
-        console.log(formData.get("variants"));
-        console.log(
-          "form.variants",
-          formData.getAll("variants[][id]"),
-          form.variants
-        );
-
         action(formData);
       }}
     >
