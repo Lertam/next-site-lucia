@@ -159,7 +159,7 @@ model NewsComment {
 }
 
 model ShopItem {
-  id      String   @id
+  id      Int   @id @default(autoincrement())
   name    String
   preview String
   source  String

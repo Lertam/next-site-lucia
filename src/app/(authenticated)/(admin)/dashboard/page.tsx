@@ -25,7 +25,7 @@ const ProtectedDashboardPage = () => {
 
           <div className={"flex flex-col"}>
             <Link href={"/dashboard/shop/categories"}>Категории</Link>
-            <Link href={"/dashboard/shop/items"}>Картинки</Link>
+            <Link href={"/dashboard/shop"}>Картинки</Link>
           </div>
         </div>
 
