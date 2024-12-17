@@ -34,6 +34,7 @@ model User {
 
   passwordResetToken PasswordResetToken[]
   SurveyVote         SurveyVote[]
+  comments           NewsComment[]
 }
 
 model Session {
@@ -108,9 +109,10 @@ model News {
   published Boolean  @default(false)
 
   surveyId String?
-  survey Survey? @relation(fields: [surveyId], references: [id])
-}
+  survey   Survey? @relation(fields: [surveyId], references: [id])
 
+  comments NewsComment[]
+}
 
 model Survey {
   id       String   @id
@@ -142,4 +144,16 @@ model SurveyVote {
   variant   SurveyVariant @relation(fields: [variantId], references: [id])
 
   @@id([userId, variantId])
+}
+
+model NewsComment {
+  id     String @id
+  newsId String
+  news   News   @relation(fields: [newsId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  text    String
+  created DateTime @default(now())
 }
