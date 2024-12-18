@@ -16,7 +16,7 @@ const ProfilePage = async () => {
         }
       >
         <CardButton text={"Кабинет"} />
-        <CardButton text={"Моя касса"} />
+        <CardButton text={"Моя касса"} link={"/billing"} />
         <CardButton text={"Сообщения"} />
         {user && user.role === UserRole.ADMIN && (
           <CardButton text={"Админка"} link={"/dashboard"} />

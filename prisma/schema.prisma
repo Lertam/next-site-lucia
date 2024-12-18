@@ -35,6 +35,7 @@ model User {
   passwordResetToken PasswordResetToken[]
   SurveyVote         SurveyVote[]
   comments           NewsComment[]
+  billings           Billing[]
 }
 
 model Session {
@@ -159,23 +160,46 @@ model NewsComment {
 }
 
 model ShopItem {
-  id      Int   @id @default(autoincrement())
+  id      Int      @id @default(autoincrement())
   name    String
   preview String
   source  String
   created DateTime @default(now())
 
-  data Json
-  price Int @default(0)
+  data  Json
+  price Int  @default(0)
 
   categoryId String?
   category   ShopCategory? @relation(fields: [categoryId], references: [id])
+  billings   Billing[]
 }
 
 model ShopCategory {
-  id   String @id
-  name String
-  weight Int @default(0)
+  id     String @id
+  name   String
+  weight Int    @default(0)
 
   items ShopItem[]
+}
+
+enum BillingStatus {
+  WAIT
+  READY
+  DELETED
+}
+
+model Billing {
+  id      Int    @id @default(autoincrement())
+  sum     Int
+  comment String @default("")
+  status BillingStatus @default(WAIT)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  shopItemId Int?
+  shopItem   ShopItem? @relation(fields: [shopItemId], references: [id])
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt @default(now())
 }
