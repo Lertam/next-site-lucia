@@ -16,7 +16,7 @@ const ShopSettings = async (props: {
   const currentPage = Number(searchParams?.page) || 1;
 
   const items = await getShopItems(currentPage, query, category);
-  const totalPages = await getShopItemsCount(currentPage, query, category);
+  const totalPages = await getShopItemsCount(query, category);
 
   const categories = await getCategories();
 
@@ -24,7 +24,7 @@ const ShopSettings = async (props: {
     <div className={"h-full w-full m-auto flex flex-col"}>
       <div className={"relative my-4"}>
         <h1 className={"text-center font-bold uppercase relative"}>
-          Выберите категорию
+          Управление товарами
         </h1>
         <BackLink href={"/dashboard"} />
         <Link href={"/dashboard/shop/add"} className={"absolute right-0 top-0"}>
@@ -40,7 +40,7 @@ const ShopSettings = async (props: {
           <ItemCard key={`shptm${item.id}`} {...item} />
         ))}
       </div>
-      {totalPages > 0 && (
+      {totalPages > 1 && (
         <div className={"mx-auto"}>
           <Pagination totalPages={totalPages} />
         </div>

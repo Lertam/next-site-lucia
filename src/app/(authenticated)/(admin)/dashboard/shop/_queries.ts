@@ -36,7 +36,6 @@ export const getShopItems = async (
 };
 
 export const getShopItemsCount = async (
-  page: number = 1,
   query: string = "",
   category: string = "all"
 ) => {
@@ -60,4 +59,8 @@ export const getShopItemsCount = async (
     where,
   });
   return Math.ceil(totalItems / ITEMS_PER_PAGE);
+};
+
+export const getShopItem = async (itemId: number) => {
+  return prisma.shopItem.findUnique({ where: { id: Number(itemId) } });
 };
