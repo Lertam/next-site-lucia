@@ -28,7 +28,7 @@ const ShopPage = async ({
   const categories = await getCategories();
 
   const { category, query, sorting, page } = await searchParams;
-  const currentPage = Number(page);
+  const currentPage = Number(page) || 1;
 
   const items = await getShopItems(category, sorting, query, currentPage);
   const pages = await getShopPages(category, query);
@@ -37,7 +37,7 @@ const ShopPage = async ({
       <h1 className={"text-center font-bold uppercase relative"}>
         Магазин картинок
       </h1>
-      <BackLink />
+      <BackLink href={"/"} />
       <div className={"mt-4 grid grid-cols-3 gap-4"}>
         <CategorySwitcher categories={categories} />
         <Sorting />
