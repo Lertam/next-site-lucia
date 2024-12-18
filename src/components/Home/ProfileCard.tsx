@@ -1,7 +1,10 @@
+import { getAuth } from "@/features/auth/queries/get-auth";
 import CardButton from "./CardButton";
 import CardWrapper from "./CardWrapper";
+import { UserRole } from "@prisma/client";
 
-const ProfilePage = () => {
+const ProfilePage = async () => {
+  const { user } = await getAuth();
   return (
     <CardWrapper
       image={"/images/home/Profile.jpg"}
@@ -15,7 +18,9 @@ const ProfilePage = () => {
         <CardButton text={"Кабинет"} />
         <CardButton text={"Моя касса"} />
         <CardButton text={"Сообщения"} />
-        <CardButton text={"Админка"} link={"/dashboard"}/>
+        {user && user.role === UserRole.ADMIN && (
+          <CardButton text={"Админка"} link={"/dashboard"} />
+        )}
       </div>
     </CardWrapper>
   );

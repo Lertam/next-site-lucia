@@ -1,8 +1,7 @@
 "use client";
 
 import { News, Survey } from "@prisma/client";
-import { FC, useState } from "react";
-import { useFormState } from "react-dom";
+import { FC, useActionState, useState } from "react";
 import FormInput from "@/components/Forms/FormInput";
 import RichTextEditor from "@/components/Forms/RichTextEditor";
 import FormSwitch from "@/components/Forms/FormSwitch";
@@ -30,7 +29,7 @@ const EditNewsForm: FC<{ newsItem?: News & { survey: Survey | null } }> = ({
         }
   );
 
-  const [state, action] = useFormState(editNewsItem, { ok: false });
+  const [state, action] = useActionState(editNewsItem, { ok: false });
 
   return (
     <form className={"mt-4"} action={action}>

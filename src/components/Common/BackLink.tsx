@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FC } from "react";
 
@@ -22,7 +23,7 @@ const BackLink: FC<{ href?: string }> = ({ href }) => {
           } else {
             newParams.delete("step");
           }
-          console.log("set step", newParams.get('step'))
+          console.log("set step", newParams.get("step"));
           router.replace(`${pathname}?${newParams.toString()}`);
           return;
         }
@@ -32,9 +33,10 @@ const BackLink: FC<{ href?: string }> = ({ href }) => {
           router.back();
         }
       }}
-      className={"cursor-pointer absolute top-0"}
+      className={"cursor-pointer absolute top-0 flex"}
     >
-      {`< Назад`}
+      <ArrowLongLeftIcon className={"w-5 mr-2 text-foreground"} />
+      <span>Назад</span>
     </a>
   );
 };

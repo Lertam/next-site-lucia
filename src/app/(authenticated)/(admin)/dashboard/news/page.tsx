@@ -2,8 +2,8 @@ import BackLink from "@/components/Common/BackLink";
 import Link from "next/link";
 import { getNewsCount, getNewsList } from "./_queries";
 import NewsItem from "./_components/NewsItem";
-import Search from "./_components/Search";
-import Pagination from "./_components/Pagination";
+import Search from "../../../../../components/Common/Search";
+import Pagination from "../../../../../components/Common/Pagination";
 
 export const metadata = {
   title: "Новости",

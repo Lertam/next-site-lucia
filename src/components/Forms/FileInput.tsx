@@ -7,11 +7,20 @@ const FileInput: FC<{
   label: string | ReactNode;
   error?: string[];
   inputProps?: InputHTMLAttributes<HTMLInputElement>;
-}> = ({ id, name, value, label, error, inputProps }) => {
+  noImage?: boolean;
+}> = ({ id, name, value, label, error, inputProps, noImage }) => {
   console.log(value);
+  // TODO Download by click
   return (
     <div className={"flex flex-col mb-4"}>
-      {value && value.length > 0 && <img src={value} className={"max-w-40"} />}
+      {value && value.length > 0 && !noImage && (
+        <img
+          src={value}
+          className={"max-w-40"}
+          alt={typeof label === "string" ? label : "Прикрепленный файл"}
+        />
+      )}
+      {value && value.length > 0 && noImage && <span>{value}</span>}
       {typeof label === "string" ? (
         <label htmlFor={id}>{label}</label>
       ) : (

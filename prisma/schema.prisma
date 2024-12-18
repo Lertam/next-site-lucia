@@ -157,3 +157,25 @@ model NewsComment {
   text    String
   created DateTime @default(now())
 }
+
+model ShopItem {
+  id      Int   @id @default(autoincrement())
+  name    String
+  preview String
+  source  String
+  created DateTime @default(now())
+
+  data Json
+  price Int @default(0)
+
+  categoryId String?
+  category   ShopCategory? @relation(fields: [categoryId], references: [id])
+}
+
+model ShopCategory {
+  id   String @id
+  name String
+  weight Int @default(0)
+
+  items ShopItem[]
+}

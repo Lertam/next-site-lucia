@@ -3,8 +3,7 @@
 import FormInput from "@/components/Forms/FormInput";
 import SubmitButton from "@/components/Forms/SubmitButton";
 import { RetouchVariant } from "@prisma/client";
-import { FC } from "react";
-import { useFormState } from "react-dom";
+import { FC, useActionState } from "react";
 import FileInput from "@/components/Forms/FileInput";
 import { editRetouchVariant } from "../_actions/edit-retouch-variant";
 import { deleteRetouchVariant } from "../_actions/delete-retouch-variant";
@@ -15,7 +14,7 @@ const EditRetouchVariantForm: FC<{
   variantId: string;
   variant?: RetouchVariant;
 }> = ({ variantId, serviceId, variant }) => {
-  const [state, action] = useFormState(editRetouchVariant, { ok: false });
+  const [state, action] = useActionState(editRetouchVariant, { ok: false });
 
   return (
     <form className={"mt-4"} action={action}>

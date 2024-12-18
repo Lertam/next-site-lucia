@@ -1,8 +1,7 @@
 "use client";
 
 import { Faq } from "@prisma/client";
-import { FC, useState } from "react";
-import { useFormState } from "react-dom";
+import { FC, useActionState, useState } from "react";
 import { editQuestion } from "../_actions/edit-faq";
 import FormInput from "@/components/Forms/FormInput";
 import RichTextEditor from "@/components/Forms/RichTextEditor";
@@ -23,7 +22,7 @@ const EditFAQForm: FC<{ question?: Faq }> = ({ question }) => {
         }
   );
 
-  const [state, action] = useFormState(editQuestion, { ok: false });
+  const [state, action] = useActionState(editQuestion, { ok: false });
 
   return (
     <form className={"mt-4"} action={action}>

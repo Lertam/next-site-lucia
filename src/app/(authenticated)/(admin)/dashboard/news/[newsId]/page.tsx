@@ -20,6 +20,7 @@ const EditNewsPage = async ({
         Редактирование новости
       </h1>
       <BackLink href={"/dashboard/news"} />
+      {/* TODO Fix it */}
       <EditNewsForm newsItem={newsItem} />
     </div>
   );

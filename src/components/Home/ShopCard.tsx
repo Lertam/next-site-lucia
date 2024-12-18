@@ -12,7 +12,7 @@ const ShopCard = () => {
           "flex flex-col items-center justify-center gap-2 w-full h-full"
         }
       >
-        <CardButton text={"Магазин картинок"} />
+        <CardButton text={"Магазин картинок"} link={"/shop"} />
         <CardButton text={"Мои картинки"} />
         <CardButton text={"Популярное"} />
       </div>

@@ -1,4 +1,4 @@
-import Pagination from "../(authenticated)/(admin)/dashboard/news/_components/Pagination";
+import Pagination from "../../components/Common/Pagination";
 import { getNewsList } from "../(authenticated)/(admin)/dashboard/news/_queries";
 import NewsCard from "./_components/NewsCard";
 import { getNewsTotalPages } from "./_queries";
