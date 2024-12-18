@@ -1,9 +1,10 @@
 import BackLink from "@/components/Common/BackLink";
 import { prisma } from "@/lib/prisma";
-import CategorySwitcher from "../(authenticated)/(admin)/dashboard/shop/_components/CategorySwitcher";
+import CategorySwitcher from "./_components/CategorySwitcher";
 import Search from "@/components/Common/Search";
 import Sorting from "./_components/Sorting";
-import { getShopItems } from "./_queries";
+import { getShopItems, getShopPages } from "./_queries";
+import Pagination from "@/components/Common/Pagination";
 
 const getCategories = async () => {
   "use server";
@@ -30,6 +31,7 @@ const ShopPage = async ({
   const currentPage = Number(page);
 
   const items = await getShopItems(category, sorting, query, currentPage);
+  const pages = await getShopPages(category, query);
   return (
     <div className={"h-full w-full m-auto flex flex-col mt-4 relative"}>
       <h1 className={"text-center font-bold uppercase relative"}>
@@ -53,6 +55,7 @@ const ShopPage = async ({
           </div>
         ))}
       </div>
+      {pages > 1 && <Pagination totalPages={pages} />}
     </div>
   );
 };

@@ -2,13 +2,23 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
+const ITEMS_PER_PAGE = 10;
+
 export const getShopItems = async (
   category: string,
   sorting: "popular" | "id_asc" | "id_desc" | "price_asc" | "price_desc",
   query: string = "",
   currentPage: number = 1
 ) => {
-  console.log(category, sorting, query, currentPage);
+  return prisma.shopItem.findMany({
+    where: generateWhere(category, query),
+    orderBy: generateOrderBy(sorting),
+    take: ITEMS_PER_PAGE,
+    skip: (currentPage - 1) * ITEMS_PER_PAGE,
+  });
+};
+
+const generateWhere = (category: string, query: string) => {
   const where: Prisma.ShopItemWhereInput = {};
   if (category !== "all") {
     where.categoryId = category;
@@ -29,28 +39,33 @@ export const getShopItems = async (
       });
     }
   }
+  return where;
+};
 
-  const orderBy: Prisma.ShopItemOrderByWithAggregationInput = {};
+const generateOrderBy = (
+  sorting: "popular" | "id_asc" | "id_desc" | "price_asc" | "price_desc"
+): Prisma.ShopItemOrderByWithAggregationInput => {
   switch (sorting) {
     case "price_asc":
-      orderBy.price = "asc";
-      break;
+      return { price: "asc" };
     case "price_desc":
-      orderBy.price = "desc";
-      break;
+      return { price: "desc" };
     case "id_asc":
-      orderBy.id = "asc";
-      break;
+      return { id: "asc" };
     case "id_desc":
-      orderBy.id = "desc";
-      break;
+      return { id: "desc" };
 
     case "popular":
     default:
       // TODO По умолчанию - по популярности
-      orderBy.id = "desc";
+      return { id: "desc" };
   }
+};
 
-  console.log(where);
-  return prisma.shopItem.findMany({ where, orderBy });
+export const getShopPages = async (category: string, query: string = "") => {
+  const totalCount = await prisma.shopItem.count({
+    where: generateWhere(category, query),
+  });
+  console.log(totalCount)
+  return Math.ceil(totalCount / ITEMS_PER_PAGE);
 };

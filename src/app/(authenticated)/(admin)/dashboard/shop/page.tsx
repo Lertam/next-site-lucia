@@ -1,10 +1,10 @@
 import BackLink from "@/components/Common/BackLink";
 import Link from "next/link";
 import { getShopItems, getShopItemsCount } from "./_queries";
-import Search from "../../../../../components/Common/Search";
-import CategorySwitcher from "./_components/CategorySwitcher";
+import Search from "@/components/Common/Search";
+import CategorySwitcher from "@/app/shop/_components/CategorySwitcher";
 import { getCategories } from "./categories/_queries";
-import Pagination from "../../../../../components/Common/Pagination";
+import Pagination from "@/components/Common/Pagination";
 import ItemCard from "./_components/ItemCard";
 
 const ShopSettings = async (props: {
