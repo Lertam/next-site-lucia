@@ -1,9 +1,9 @@
 import BackLink from "@/components/Common/BackLink";
-import Search from "../_components/Search";
+import Search from "../../../../../../components/Common/Search";
 import Link from "next/link";
 import { getSurveys, getTotalSurveysPages } from "./_queries";
 import SurveyRow from "./_components/SurveyRow";
-import Pagination from "../_components/Pagination";
+import Pagination from "../../../../../../components/Common/Pagination";
 
 const SurveysPage = async (props: {
   searchParams?: Promise<{ query?: string; page?: string }>;

@@ -4,7 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { FC } from "react";
-import { DOTS, usePagination } from "./usePagination";
+import { DOTS, usePagination } from "../../app/(authenticated)/(admin)/dashboard/news/_components/usePagination";
 
 const Pagination: FC<{ totalPages: number }> = ({ totalPages }) => {
   const pathname = usePathname();

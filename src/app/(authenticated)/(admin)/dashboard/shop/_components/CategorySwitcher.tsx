@@ -27,7 +27,7 @@ const CategorySwitcher: FC<{ categories: ShopCategory[] }> = ({
     <select
       name={"categoryId"}
       onChange={(ev) => handleSwitch(ev.target.value)}
-      className={"rounded"}
+      className={"rounded p-2"}
     >
       <option value={"all"}>Все категории</option>
       {categories.map((c) => (
