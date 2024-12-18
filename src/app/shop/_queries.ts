@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 
 export const getShopItems = async (
   category: string,
-  sorting: string,
+  sorting: "popular" | "id_asc" | "id_desc" | "price_asc" | "price_desc",
   query: string = "",
   currentPage: number = 1
 ) => {
@@ -30,6 +30,27 @@ export const getShopItems = async (
     }
   }
 
+  const orderBy: Prisma.ShopItemOrderByWithAggregationInput = {};
+  switch (sorting) {
+    case "price_asc":
+      orderBy.price = "asc";
+      break;
+    case "price_desc":
+      orderBy.price = "desc";
+      break;
+    case "id_asc":
+      orderBy.id = "asc";
+      break;
+    case "id_desc":
+      orderBy.id = "desc";
+      break;
+
+    case "popular":
+    default:
+      // TODO По умолчанию - по популярности
+      orderBy.id = "desc";
+  }
+
   console.log(where);
-  return prisma.shopItem.findMany({ where });
+  return prisma.shopItem.findMany({ where, orderBy });
 };

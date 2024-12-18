@@ -166,6 +166,7 @@ model ShopItem {
   created DateTime @default(now())
 
   data Json
+  price Int @default(0)
 
   categoryId String?
   category   ShopCategory? @relation(fields: [categoryId], references: [id])

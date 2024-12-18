@@ -14,6 +14,7 @@ type State = {
     preview?: string[];
     source?: string[];
     categoryId?: string[];
+    price?: string[];
   };
   message?: string;
 };
@@ -22,6 +23,9 @@ const Schema = z.object({
   itemId: z.coerce.number().optional(),
   categoryId: z.string(),
   name: z.string({ message: "Укажите название" }),
+  price: z.coerce
+    .number({ message: "Укажите цену" })
+    .min(0, { message: "Цена должна быть больше нуля" }),
 });
 
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/bmp"];
@@ -34,6 +38,7 @@ export const editShopItem = async (
     itemId: formData.get("itemId"),
     categoryId: formData.get("categoryId"),
     name: formData.get("name"),
+    price: formData.get("price"),
   });
 
   if (!parsedInput.success) {
@@ -114,6 +119,7 @@ export const editShopItem = async (
         preview: previewFilename,
         source: sourceFilename,
         data: "",
+        price: parsedInput.data.price,
       },
     });
   } else {
@@ -131,6 +137,7 @@ export const editShopItem = async (
         categoryId: parsedInput.data.categoryId,
         preview: previewFilename,
         source: sourceFilename,
+        price: parsedInput.data.price,
       },
     });
   }

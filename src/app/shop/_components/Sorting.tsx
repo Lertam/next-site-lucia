@@ -27,9 +27,9 @@ const Sorting = () => {
       onChange={(ev) => handleSorting(ev.target.value)}
     >
       <option value={"popular"}>По популярности</option>
-      <option value={"time_desc"}>Сначала новые</option>
-      <option value={"time_asd"}>Сначала старые</option>
-      <option value={"price_ascc"}>По цене ▲</option>
+      <option value={"id_desc"}>Сначала новые</option>
+      <option value={"id_asc"}>Сначала старые</option>
+      <option value={"price_asc"}>По цене ▲</option>
       <option value={"price_desc"}>По цене ▼</option>
     </select>
   );

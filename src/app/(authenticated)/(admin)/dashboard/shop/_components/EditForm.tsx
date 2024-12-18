@@ -22,6 +22,7 @@ const EditShopItemForm: FC<{ categories: ShopCategory[]; item?: ShopItem }> = ({
         categoryId: null,
         created: new Date(),
         data: "",
+        price: 0,
       };
 
   const [state, action] = useActionState(editShopItem, {});
@@ -36,14 +37,23 @@ const EditShopItemForm: FC<{ categories: ShopCategory[]; item?: ShopItem }> = ({
         defaultValue={form.name}
         error={state.errors?.name}
       />
-
-      <FormSelect
-        name={"categoryId"}
-        options={categories.map((c) => ({ value: c.id, label: c.name }))}
-        label={"Категория"}
-        id={"categoryId"}
-        value={form.categoryId}
-      />
+      <div className={"grid grid-cols-2 gap-4"}>
+        <FormSelect
+          name={"categoryId"}
+          options={categories.map((c) => ({ value: c.id, label: c.name }))}
+          label={"Категория"}
+          id={"categoryId"}
+          value={form.categoryId}
+        />
+        <FormInput
+          type={"number"}
+          defaultValue={form.price}
+          name={"price"}
+          id={"price"}
+          inline
+          label={"Цена"}
+        />
+      </div>
       <div className={"mt-4 grid grid-cols-2 gap-4 items-end"}>
         <FileInput
           label={"Превью"}

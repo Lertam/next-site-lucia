@@ -20,7 +20,7 @@ const ShopPage = async ({
   searchParams: Promise<{
     page: string;
     category: string;
-    sorting: string;
+    sorting: "popular" | "id_asc" | "id_desc" | "price_asc" | "price_desc";
     query: string;
   }>;
 }) => {
@@ -43,11 +43,14 @@ const ShopPage = async ({
       </div>
       <div className={"mt-4 grid grid-cols-8 gap-4"}>
         {items.map((item) => (
-          <img
-            key={item.id}
-            src={`/modules/shop/previews/${item.preview}`}
-            alt={item.name}
-          />
+          <div key={`img${item.id}`}>
+            <img
+              key={item.id}
+              src={`/modules/shop/previews/${item.preview}`}
+              alt={item.name}
+            />
+            <span>{item.price}</span>
+          </div>
         ))}
       </div>
     </div>
