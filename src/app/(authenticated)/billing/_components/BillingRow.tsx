@@ -14,7 +14,7 @@ const mapStatus = (status: BillingStatus): string => {
   }
 };
 
-const BillingRow: FC<Billing> = ({ id, sum, status, comment }) => {
+const BillingRow: FC<Billing> = ({ id, sum, status, comment, shopItemId }) => {
   let className = "";
   switch (status) {
     case BillingStatus.READY:
@@ -53,7 +53,7 @@ const BillingRow: FC<Billing> = ({ id, sum, status, comment }) => {
       <div
         className={"py-3 text-center border-b-2 border-gray-400 " + className}
       >
-        -
+        {shopItemId && "Картинка"}
       </div>
     </>
   );

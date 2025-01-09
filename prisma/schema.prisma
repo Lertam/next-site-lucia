@@ -203,3 +203,23 @@ model Billing {
   created DateTime @default(now())
   updated DateTime @updatedAt @default(now())
 }
+
+enum PaymentGateways {
+  ROBOKASSA
+  WALLET_ONE
+  UNITPAY
+  YOOMONEY
+}
+
+model FastWay {
+  id String @id
+  sum Int
+  way PaymentGateways
+  enabled Boolean @default(false)
+}
+
+model Config {
+  id String @id
+  key String @unique
+  value Json
+}
