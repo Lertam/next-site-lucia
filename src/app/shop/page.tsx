@@ -5,6 +5,7 @@ import Search from "@/components/Common/Search";
 import Sorting from "./_components/Sorting";
 import { getShopItems, getShopPages } from "./_queries";
 import Pagination from "@/components/Common/Pagination";
+import Link from "next/link";
 
 const getCategories = async () => {
   "use server";
@@ -56,6 +57,7 @@ const ShopPage = async ({
         ))}
       </div>
       {pages > 1 && <Pagination totalPages={pages} />}
+      <Link href={"/shop/test"}>Test</Link>
     </div>
   );
 };

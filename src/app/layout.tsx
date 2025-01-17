@@ -51,6 +51,7 @@ export default async function RootLayout({
           <UserCounter />
         </main>
         <Footer />
+        <div id="modal-root" />
       </body>
     </html>
   );

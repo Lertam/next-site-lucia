@@ -34,6 +34,9 @@ const ProtectedDashboardPage = () => {
 
           <div className={"flex flex-col"}>
             <Link href={"/dashboard/billing/gateways"}>Агрегаторы</Link>
+            <Link href={"/dashboard/billing/fast-ways"}>
+              Кнопки быстрой оплаты
+            </Link>
           </div>
         </div>
 

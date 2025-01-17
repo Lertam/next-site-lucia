@@ -12,7 +12,7 @@ const PaymentGatewaySettings = async () => {
         </h1>
         <BackLink href={"/dashboard"} />
       </div>
-      <div>
+      <div className={"w-80 mx-auto mt-4"}>
         <SettingsForm settings={settings} />
       </div>
     </div>
