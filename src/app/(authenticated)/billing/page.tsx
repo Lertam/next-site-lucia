@@ -4,6 +4,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import BillingRow from "./_components/BillingRow";
 import { revalidatePath } from "next/cache";
+import { getAuth } from "@/features/auth/queries/get-auth";
 
 export const metadata = {
   title: "Моя касса",
@@ -11,7 +12,12 @@ export const metadata = {
 
 const getBillings = async () => {
   "use server";
+  const { user } = await getAuth();
+  if (!user) throw new Error("user not logged");
   return prisma.billing.findMany({
+    where: {
+      userId: user.id,
+    },
     orderBy: {
       id: "desc",
     },

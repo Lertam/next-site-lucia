@@ -37,6 +37,7 @@ const ProtectedDashboardPage = () => {
             <Link href={"/dashboard/billing/fast-ways"}>
               Кнопки быстрой оплаты
             </Link>
+            <Link href={"/dashboard/billing"}>Касса админа</Link>
           </div>
         </div>
 

@@ -200,7 +200,7 @@ model Billing {
   shopItemId Int?
   shopItem   ShopItem? @relation(fields: [shopItemId], references: [id])
 
-  way PaymentGateways @default(WALLET_ONE)
+  way PaymentGateways? @default(WALLET_ONE)
 
   created DateTime @default(now())
   updated DateTime @default(now()) @updatedAt
