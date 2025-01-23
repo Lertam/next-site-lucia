@@ -3,6 +3,7 @@ import BalanceBlock from "@/components/Home/BalanceBlock";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import BillingRow from "./_components/BillingRow";
+import { revalidatePath } from "next/cache";
 
 export const metadata = {
   title: "Моя касса",
@@ -15,6 +16,16 @@ const getBillings = async () => {
       id: "desc",
     },
   });
+};
+
+const refetchBillings = async () => {
+  "use server";
+  // await prisma.billing.findMany({
+  //   orderBy: {
+  //     id: "desc",
+  //   },
+  // });
+  revalidatePath("/billing");
 };
 
 const BillingPage = async () => {
@@ -32,6 +43,7 @@ const BillingPage = async () => {
         <div>
           <button
             className={"bg-foreground text-white py-1 px-2 w-auto uppercase"}
+            onClick={refetchBillings}
           >
             Обновить
           </button>

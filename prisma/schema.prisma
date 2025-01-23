@@ -189,10 +189,10 @@ enum BillingStatus {
 }
 
 model Billing {
-  id      Int    @id @default(autoincrement())
+  id      Int           @id @default(autoincrement())
   sum     Int
-  comment String @default("")
-  status BillingStatus @default(WAIT)
+  comment String        @default("")
+  status  BillingStatus @default(WAIT)
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
@@ -200,8 +200,10 @@ model Billing {
   shopItemId Int?
   shopItem   ShopItem? @relation(fields: [shopItemId], references: [id])
 
+  way PaymentGateways @default(WALLET_ONE)
+
   created DateTime @default(now())
-  updated DateTime @updatedAt @default(now())
+  updated DateTime @default(now()) @updatedAt
 }
 
 enum PaymentGateways {
@@ -212,14 +214,14 @@ enum PaymentGateways {
 }
 
 model FastWay {
-  id String @id
-  sum Int
-  way PaymentGateways
-  weight Int @default(0)
+  id     String          @id
+  sum    Int
+  way    PaymentGateways
+  weight Int             @default(0)
 }
 
 model Config {
-  id String @id
-  key String @unique
+  id    String @id
+  key   String @unique
   value Json
 }

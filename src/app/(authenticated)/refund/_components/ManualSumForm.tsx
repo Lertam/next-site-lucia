@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FC, useState } from "react";
 import Footer from "./Footer";
 import FastWayBlock from "./FastWay";
+import { createBilling } from "../_actions";
 
 const ManualSumForm: FC<{
   paymentSettings: Record<PaymentGateways, boolean>;
@@ -93,6 +94,9 @@ const ManualSumForm: FC<{
                 value={name}
                 key={`pg${name}`}
                 className={"flex flex-col shadow-xl p-2 items-center"}
+                onClick={() => {
+                  createBilling(name, sum);
+                }}
               >
                 <div
                   className={

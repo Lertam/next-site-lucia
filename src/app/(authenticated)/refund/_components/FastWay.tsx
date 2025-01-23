@@ -2,6 +2,7 @@ import { formatCurrency } from "@/lib/utils";
 import { PaymentwayNames } from "@/lib/utils/contants";
 import { FastWay, PaymentGateways } from "@prisma/client";
 import { FC, useMemo } from "react";
+import { createBilling } from "../_actions";
 
 const FastWayBlock: FC<FastWay> = ({ sum, way }) => {
   const img = useMemo<string>(() => {
@@ -19,7 +20,10 @@ const FastWayBlock: FC<FastWay> = ({ sum, way }) => {
     }
   }, [way]);
   return (
-    <div className={"flex gap-4 items-center bg-white rounded px-4 py-2"}>
+    <button
+      className={"flex gap-4 items-center bg-white rounded px-4 py-2"}
+      onClick={() => createBilling(way, sum)}
+    >
       <img
         src={img}
         className={"h-[30px]"}
@@ -34,7 +38,7 @@ const FastWayBlock: FC<FastWay> = ({ sum, way }) => {
           {formatCurrency(sum)}
         </span>
       </div>
-    </div>
+    </button>
   );
 };
 
