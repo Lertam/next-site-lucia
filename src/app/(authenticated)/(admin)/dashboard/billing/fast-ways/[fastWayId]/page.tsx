@@ -1,5 +1,5 @@
 import BackLink from "@/components/Common/BackLink";
-import { getPaymentGatewaysSettings } from "../../gateways/_queries";
+import { getPaymentGatewaysSettings } from "../../../../../billing/_queries";
 import FastWaysForm from "../_components/FastWaysForm";
 import { getFastWay } from "../_queries";
 

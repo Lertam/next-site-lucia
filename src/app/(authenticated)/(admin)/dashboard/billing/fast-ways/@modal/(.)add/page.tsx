@@ -1,5 +1,5 @@
 import FastWaysForm from "../../_components/FastWaysForm";
-import { getPaymentGatewaysSettings } from "../../../gateways/_queries";
+import { getPaymentGatewaysSettings } from "../../../../../../billing/_queries";
 import Modal from "@/components/Common/ModalWrapper";
 
 export const metadata = {

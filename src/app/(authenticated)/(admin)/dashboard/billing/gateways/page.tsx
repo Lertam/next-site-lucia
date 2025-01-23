@@ -1,5 +1,5 @@
 import BackLink from "@/components/Common/BackLink";
-import { getPaymentGatewaysSettings } from "./_queries";
+import { getPaymentGatewaysSettings } from "../../../../billing/_queries";
 import SettingsForm from "./_components/SettingsForm";
 
 const PaymentGatewaySettings = async () => {

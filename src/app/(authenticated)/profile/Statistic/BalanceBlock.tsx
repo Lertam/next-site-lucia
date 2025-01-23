@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getUserBalance } from "./_query";
 
 const BalanceBlock = async () => {
@@ -9,7 +10,9 @@ const BalanceBlock = async () => {
       }
     >
       <span>Баланс: {balance} р.</span>
-      <button className="main-button">Пополнить счет</button>
+      <Link href={"/refund"} className="main-button">
+        Пополнить счет
+      </Link>
     </div>
   );
 };

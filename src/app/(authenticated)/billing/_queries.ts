@@ -16,3 +16,11 @@ export const getPaymentGatewaysSettings = async () => {
   if (existed) return existed.value as Record<PaymentGateways, boolean>;
   else return defaults;
 };
+
+export const getFastWayPaymentSettings = async () => {
+  return prisma.fastWay.findMany({
+    orderBy: {
+      weight: "desc",
+    },
+  });
+};
