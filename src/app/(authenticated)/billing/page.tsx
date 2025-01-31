@@ -5,18 +5,28 @@ import { prisma } from "@/lib/prisma";
 import BillingRow from "./_components/BillingRow";
 import { revalidatePath } from "next/cache";
 import { getAuth } from "@/features/auth/queries/get-auth";
+import DatePanel from "../(admin)/dashboard/billing/_components/DatePane";
 
 export const metadata = {
   title: "Моя касса",
 };
 
-const getBillings = async () => {
+const getBillings = async (_startDate: string, _endDate: string) => {
   "use server";
   const { user } = await getAuth();
   if (!user) throw new Error("user not logged");
+
+  const startDate = new Date(_startDate);
+  startDate.setHours(0, 0, 0, 0);
+  const endDate = new Date(_endDate);
+  endDate.setHours(23, 59, 59, 999);
+
   return prisma.billing.findMany({
     where: {
-      userId: user.id,
+      created: {
+        gte: new Date(startDate),
+        lte: new Date(endDate),
+      },
     },
     orderBy: {
       id: "desc",
@@ -26,16 +36,23 @@ const getBillings = async () => {
 
 const refetchBillings = async () => {
   "use server";
-  // await prisma.billing.findMany({
-  //   orderBy: {
-  //     id: "desc",
-  //   },
-  // });
   revalidatePath("/billing");
 };
 
-const BillingPage = async () => {
-  const billings = await getBillings();
+const BillingPage = async (
+  props: Promise<{
+    searchParams?: Promise<{ startDate: Date; endDate: Date }>;
+  }>
+) => {
+  const { searchParams } = await props;
+  const dayMonthAgo = new Date();
+  dayMonthAgo.setMonth(dayMonthAgo.getMonth() - 1);
+
+  const startDate = (await searchParams)?.startDate || dayMonthAgo;
+  const endDate = (await searchParams)?.endDate || new Date();
+
+  const billings = await getBillings(startDate.toString(), endDate.toString());
+
   return (
     <div className={"h-full w-full m-auto flex flex-col"}>
       <div className={"relative my-4"}>
@@ -45,7 +62,7 @@ const BillingPage = async () => {
         </h1>
         <BackLink href={"/"} />
       </div>
-      <div className={"grid grid-cols-3"}>
+      <div className={"flex justify-between"}>
         <div>
           <button
             className={"bg-foreground text-white py-1 px-2 w-auto uppercase"}
@@ -54,7 +71,7 @@ const BillingPage = async () => {
             Обновить
           </button>
         </div>
-        <span className={"text-center"}>Период запроса c ___ по ___</span>
+        <DatePanel />
         <div>
           <Link
             href={"/refund"}
