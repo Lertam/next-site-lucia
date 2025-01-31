@@ -1,10 +1,9 @@
-import { FC } from "react";
+import { ComponentProps, FC } from "react";
 import { useFormStatus } from "react-dom";
 
-const SubmitButton: FC<{ text?: string; loadingText?: string }> = ({
-  text,
-  loadingText,
-}) => {
+const SubmitButton: FC<
+  { text?: string; loadingText?: string } & ComponentProps<"button">
+> = ({ text, loadingText, className }) => {
   const { pending } = useFormStatus();
 
   let result = "Подтвердить";
@@ -16,7 +15,7 @@ const SubmitButton: FC<{ text?: string; loadingText?: string }> = ({
   }
   return (
     <button
-      className={"bg-foreground m-auto text-white px-[30px] py-[10px]"}
+      className={`bg-foreground m-auto text-white px-[30px] py-[10px] ${className}`}
       disabled={pending}
     >
       {result}

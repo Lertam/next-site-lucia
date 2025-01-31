@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "./globals.scss";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import UserCounter from "@/components/UserCounter";
@@ -51,6 +51,7 @@ export default async function RootLayout({
           <UserCounter />
         </main>
         <Footer />
+        <div id="modal-root" />
       </body>
     </html>
   );

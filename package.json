@@ -21,6 +21,8 @@
     "react-dom": "^18",
     "react-quill": "^2.0.0",
     "react-quill-new": "^3.3.3",
+    "sass": "^1.83.4",
+    "swr": "^2.3.0",
     "use-debounce": "^10.0.4",
     "zod": "^3.23.8"
   },
