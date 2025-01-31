@@ -1,5 +1,6 @@
 "use client";
 
+import DateInput from "@/components/Forms/DateInput";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const DatePanel = () => {
@@ -34,18 +35,19 @@ const DatePanel = () => {
 
   return (
     <div className={"flex justify-center"}>
-      <input
-        type={"date"}
-        onChange={(ev) => handleDateChange("startDate", ev.target.value)}
-        value={
+      Период запроса с
+      <DateInput
+        onChange={(val) => handleDateChange("startDate", val)}
+        defaultValue={
           searchParams.get("startDate")?.toString() ||
           dayMonthAgo.toISOString().substring(0, 10)
         }
       />
-      <input className={"ml-10"}
-        type={"date"}
-        onChange={(ev) => handleDateChange("endDate", ev.target.value)}
-        defaultValue={new Date().toISOString().substring(0, 10)}
+      по
+      <DateInput
+        // containerProps={{ className: "ml-10" }}
+        onChange={(val) => handleDateChange("endDate", val)}
+        defaultValue={searchParams.get("endDate")?.toString() || new Date().toISOString().substring(0, 10)}
       />
     </div>
   );

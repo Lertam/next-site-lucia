@@ -1,5 +1,8 @@
 import { formatCurrency } from "@/lib/utils";
+import { PaymentwayNames } from "@/lib/utils/contants";
 import { Billing, BillingStatus, PaymentGateways } from "@prisma/client";
+import Image from "next/image";
+import Link from "next/link";
 import { FC, useMemo } from "react";
 
 const BillingRow: FC<
@@ -36,16 +39,31 @@ const BillingRow: FC<
         return "bg-transparent";
     }
   }, [status]);
+
+  const priceColor = useMemo<string>(
+    () => (sum > 0 ? "text-green-700" : "text-red-900"),
+    [sum]
+  );
+
   return (
     <tr className={`${bg} p-2`}>
       <td className={"p-1"}>{id}</td>
       <td>{login}</td>
-      <td>{formatCurrency(sum)}</td>
-      <td>
-        <img src={image} className={"h-4"} />
-      </td>
+      <td className={`${priceColor} font-bold`}>{formatCurrency(sum)}</td>
+
       <td>
         {created.toLocaleDateString()} {created.toLocaleTimeString()}
+      </td>
+      <td>
+        <Link href={`/dashboard/billing/${id}`}>
+          <Image
+            src={image}
+            className={"h-4"}
+            width={16}
+            height={16}
+            alt={way ? PaymentwayNames[way] : ""}
+          />
+        </Link>
       </td>
     </tr>
   );

@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h2 {
+    @apply text-2xl font-bold;
+  }
+
+  h3 {
+    @apply text-xl font-bold;
+  }
+
+  input {
+    @apply text-slate-800 border border-slate-800 p-2 rounded-md;
+  }
+
+  button.main-button,
+  a.main-button {
+    @apply text-white px-4 py-2 bg-foreground;
+  }
+
+  /* button,
+  button[type="submit"] {
+    @apply bg-slate-800 text-white p-2 rounded-md;
+  } */
+}
+
+:root {
+  --background: #e0dbcf;
+  --foreground: #3e2723;
+}
+
+body {
+  color: black;
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .date-picker {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    // border-bottom: 1px solid var(--foreground);
+    border-radius: 0;
+    padding: 0;
+    appearance: none;
+    box-sizing: border-box;
+    outline: none;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-end: 0;
+    width: min-content;
+    text-align: center;
+
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    border-bottom: 2px solid;
+    border-image: linear-gradient(
+        to right,
+        var(--background) 10%,
+        var(--foreground) 11%,
+        var(--foreground) 89%,
+        var(--background) 90%
+      )
+      50% 0;
+
+    &::-webkit-keygen-select {
+      display: none;
+    }
+
+    &::after {
+      display: none;
+      width: 0;
+      content: "";
+    }
+
+    &:focus-visible,
+    &:active,
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-input-placeholder {
+      visibility: hidden;
+      display: none;
+    }
+
+    &::-webkit-calendar-picker-indicator,
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      display: none;
+      appearance: none;
+      margin: 0;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    &::selection,
+    &::-moz-selection {
+      background: transparent;
+    }
+  }
+}
+
+ol {
+  margin: initial;
+  padding-inline-start: 40px;
+  list-style: decimal;
+}
