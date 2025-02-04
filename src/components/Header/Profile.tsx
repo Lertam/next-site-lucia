@@ -1,5 +1,4 @@
 import Image from "next/image";
-import ProfileImage from "./profile.jpg";
 import { FC } from "react";
 import Link from "next/link";
 import { getAuth } from "@/features/auth/queries/get-auth";
@@ -11,7 +10,7 @@ const Profile = async () => {
   return (
     <Link href={"/profile"}>
       <Image
-        src={ProfileImage}
+        src={`/modules/user/${user.image ? user.image : "no-avatar.jpg"}`}
         width={98}
         height={98}
         alt={user.email ? `Профиль ${user.email}` : "Profile"}
