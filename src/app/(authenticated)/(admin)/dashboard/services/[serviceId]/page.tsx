@@ -3,6 +3,11 @@ import { getRetouchService } from "../_queries/get-retouch-services";
 import RetouchServiceCard from "../_components/ServiceCard";
 import Prices from "./_prices";
 import RetouchVariants from "./_variants";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Настройка услуги",
+};
 
 export default async function ServicePage({
   params: { serviceId },
@@ -13,7 +18,7 @@ export default async function ServicePage({
   return (
     <div className={"relative mt-4"}>
       <h1 className={"text-center font-bold uppercase"}>Настройка услуги</h1>
-      <BackLink href={'/dashboard/services'} />
+      <BackLink href={"/dashboard/services"} />
       <div className={"flex flex-col md:flex-row mt-4 gap-4"}>
         <div className={"w-full sm:w-40"}>
           <RetouchServiceCard {...service} selected />

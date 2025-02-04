@@ -1,4 +1,4 @@
-import { getUserBalance } from "@/app/(authenticated)/profile/Statistic/_query";
+import { getUserBalance } from "@/app/(authenticated)/profile/_queries";
 import Link from "next/link";
 
 const BalanceBlock = async () => {

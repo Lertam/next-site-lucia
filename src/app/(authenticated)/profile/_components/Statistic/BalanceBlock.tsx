@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getUserBalance } from "./_query";
+import { getUserBalance } from "../../_queries";
 
 const BalanceBlock = async () => {
   const balance = await getUserBalance();

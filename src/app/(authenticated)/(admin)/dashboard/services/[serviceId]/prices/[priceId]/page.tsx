@@ -2,6 +2,11 @@ import BackLink from "@/components/Common/BackLink";
 import { getRetouchPrice } from "@/app/(authenticated)/(admin)/dashboard/services/_queries/get-retouch-prices";
 import { RetouchPrice } from "@prisma/client";
 import EditRetouchPriceForm from "../../../_components/EditPrice";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Создание цены",
+};
 
 const EditRetouchPricePage = async ({
   params: { priceId, serviceId },

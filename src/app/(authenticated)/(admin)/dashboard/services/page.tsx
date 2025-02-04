@@ -2,6 +2,11 @@ import BackLink from "@/components/Common/BackLink";
 import { getRetouchServices } from "@/app/(authenticated)/(admin)/dashboard/services/_queries/get-retouch-services";
 import Link from "next/link";
 import RetouchServiceCard from "./_components/ServiceCard";
+import { Metadata } from "next";
+
+export const metadata:Metadata = {
+  title: "Настройка услуг",
+}
 
 const ServicesPage = async () => {
   const services = await getRetouchServices();

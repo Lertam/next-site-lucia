@@ -2,12 +2,13 @@
 
 import { getAuth } from "@/features/auth/queries/get-auth";
 import { BillingStatus } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 export const getUserBalance = async (): Promise<number> => {
   const { user } = await getAuth();
-  if (!user) throw new Error("Need to auth");
+  if (!user) return 0; //throw new Error("Need to auth");
 
-  const res = await prisma?.billing.aggregate({
+  const res = await prisma.billing.aggregate({
     _sum: { sum: true },
     where: { userId: user.id, status: BillingStatus.READY },
   });
