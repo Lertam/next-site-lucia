@@ -10,9 +10,9 @@ import { getUser } from "./_queries";
 export const generateMetadata = async ({
   params,
 }: {
-  params: { userId: string };
+  params: Promise<{ userId: string }>;
 }): Promise<Metadata> => {
-  const user = await getUser(params.userId);
+  const user = await getUser((await params).userId);
   return { title: `Профиль ${user?.login}` };
 };
 

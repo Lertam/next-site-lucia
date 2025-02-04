@@ -53,12 +53,17 @@ export const getUserStatistic = async (
 
 export const getUserPhotos = async (
   userId: string
-): Promise<{ profile: string; standart: string }> => {
+): Promise<{ profile: string; standart: string | null }> => {
   // TODO Implements
-  const { user } = await getAuth();
-  if (!user) throw new Error("Not authorized");
+  const { user: currentUser } = await getAuth();
+  if (!currentUser) throw new Error("Not authorized");
+
+  const user = await prisma.user.findUniqueOrThrow({ where: { id: userId } });
+  const row = await prisma.config.findUnique({
+    where: { key: `retouch_standart_${userId}` },
+  });
   return {
     profile: `/modules/user/${user.image ? user.image : "no-avatar.jpg"}`,
-    standart: "/retouch-standard.jpg",
+    standart: row ? `/modules/retouch/standarts/${row.value}` : null,
   };
 };
