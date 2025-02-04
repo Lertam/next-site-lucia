@@ -4,6 +4,17 @@ import { redirect } from "next/navigation";
 import ProfileData from "../_components/ProfileData";
 import ProfilePhotos from "../_components/ProfilePhotos";
 import ProfileStatistic from "../_components/Statistic";
+import { Metadata } from "next";
+import { getUser } from "./_queries";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { userId: string };
+}): Promise<Metadata> => {
+  const user = await getUser(params.userId);
+  return { title: `Профиль ${user?.login}` };
+};
 
 const ProfilePage = async ({
   params,
@@ -21,8 +32,8 @@ const ProfilePage = async ({
       <h1 className={"text-center font-bold mt-4 uppercase"}>Кабинет</h1>
       <div className={"flex gap-4 flex-auto"}>
         <ProfileData userId={userId} />
-        <ProfilePhotos />
-        <ProfileStatistic />
+        <ProfilePhotos userId={userId} />
+        <ProfileStatistic userId={userId} />
       </div>
       {/* {user && user.role === UserRole.ADMIN && <AdminBlock />} */}
     </>
