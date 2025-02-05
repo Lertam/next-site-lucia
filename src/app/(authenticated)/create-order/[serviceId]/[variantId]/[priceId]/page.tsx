@@ -2,19 +2,20 @@ import { getRetouchPrice } from "@/app/(authenticated)/(admin)/dashboard/service
 import { getRetouchService } from "@/app/(authenticated)/(admin)/dashboard/services/_queries/get-retouch-services";
 import { getRetouchVariant } from "@/app/(authenticated)/(admin)/dashboard/services/_queries/get-retouch-variants";
 import Details from "./_details";
-import { redirect } from "next/navigation";
 
 const Retouchers = async ({
-  params: { serviceId, variantId, priceId },
-  searchParams: { step },
+  params,
+  searchParams,
 }: {
-  params: {
+  params: Promise<{
     serviceId: string;
     variantId: string;
     priceId: string;
-  };
-  searchParams: { step?: string };
+  }>;
+  searchParams: Promise<{ step?: string }>;
 }) => {
+  const { serviceId, variantId, priceId } = await params;
+  const { step } = await searchParams;
   if (step) {
     // TODO Прикрыть прямую загрузку страниц типа ?step=2
     // redirect(`/create-order/${serviceId}/${variantId}/${priceId}`);

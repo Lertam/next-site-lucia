@@ -4,6 +4,8 @@ import "./globals.scss";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import UserCounter from "@/components/UserCounter";
+import { getAuth } from "@/features/auth/queries/get-auth";
+import { getUserAccess, UserAccess } from "@/lib/utils";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -36,6 +38,17 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { session } = await getAuth();
+  let access: UserAccess = {
+    site: true,
+    messenger: true,
+    editor: true,
+    orders: true,
+  };
+  if (session) {
+    access = await getUserAccess(session.userId);
+  }
+
   return (
     <html lang={"ru"}>
       <body
@@ -47,8 +60,16 @@ export default async function RootLayout({
           style={{ flexGrow: 999 }}
         >
           {/* TODO Прописать брейкпоинты */}
-          {children}
-          <UserCounter />
+          {access.site ? (
+            <>
+              {children}
+              <UserCounter />
+            </>
+          ) : (
+            <div className={"flex flex-col items-center justify-center h-full"}>
+              <span className={"text-2xl"}>Доступ к сайту запрещен</span>
+            </div>
+          )}
         </main>
         <Footer />
         <div id="modal-root" />

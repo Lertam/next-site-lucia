@@ -5,11 +5,10 @@ import Link from "next/link";
 import { getUserInfo } from "../../[userId]/_queries";
 import { FC } from "react";
 
-const ProfileInfo:FC<{userId:string}> = async ({userId}) => {
+const ProfileInfo: FC<{ userId: string }> = async ({ userId }) => {
   const { user } = await getAuth();
   if (!user) return null;
   const data = await getUserInfo(userId);
-  console.log(data, userId);
 
   return (
     <div className={"flex flex-col gap-4 mt-4 items-center"}>
@@ -23,7 +22,7 @@ const ProfileInfo:FC<{userId:string}> = async ({userId}) => {
           {data.email}
           {user.role === UserRole.ADMIN && (
             <Link
-              href={`/profile/${user.id}/change-email`}
+              href={`/profile/${userId}/change-email`}
               className={"flex flex-col items-center justify-center"}
             >
               <PencilIcon className={"w-3 h-3"} />
@@ -37,7 +36,7 @@ const ProfileInfo:FC<{userId:string}> = async ({userId}) => {
       </div>
       <div>
         <Link
-          href={`/profile/${user.id}/change-password`}
+          href={`/profile/${userId}/change-password`}
           className={"underline"}
         >
           Смена пароля

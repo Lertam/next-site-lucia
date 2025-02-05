@@ -20,3 +20,11 @@ export const PaymentwayImage: Record<
   [PaymentGateways.WALLET_ONE]: { mini: "w1_logo.png", base: "w1_logo.png" },
   [PaymentGateways.YOOMONEY]: { mini: "yoomoney.png", base: "yoomoney.png" },
 };
+
+export const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/bmp",
+  "image/png",
+  "image/webp",
+];
