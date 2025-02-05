@@ -3,6 +3,7 @@
 import { User, UserRole } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getAuth } from "@/features/auth/queries/get-auth";
+import { getUserAccess, UserAccess } from "@/lib/utils";
 
 export const getUser = async (userId: string): Promise<User | null> => {
   return prisma.user.findUnique({ where: { id: userId } });
@@ -65,5 +66,46 @@ export const getUserPhotos = async (
   return {
     profile: `/modules/user/${user.image ? user.image : "no-avatar.jpg"}`,
     standart: row ? `/modules/retouch/standarts/${row.value}` : null,
+  };
+};
+
+export const getAdminData = async (
+  userId: string
+): Promise<{
+  meta: { login: Date | null; created: Date | null };
+  access: UserAccess;
+  role: UserRole;
+  label: string;
+}> => {
+  const { user: currentUser } = await getAuth();
+  if (!currentUser || currentUser.role !== UserRole.ADMIN) {
+    throw new Error("Not authorized");
+  }
+
+  const session = await prisma.session.findFirst({
+    where: { userId },
+    orderBy: { createdAt: "desc" },
+    include: {
+      user: {
+        select: {
+          createdAt: true,
+          role: true,
+        },
+      },
+    },
+  });
+  const access = await getUserAccess(userId);
+  const label = await prisma.config.findUnique({
+    where: { key: `retoucher-label-${userId}` },
+  });
+  const user = await prisma.user.findUniqueOrThrow({ where: { id: userId } });
+  return {
+    meta: {
+      created: session ? session.user.createdAt : null,
+      login: session ? session.createdAt : null,
+    },
+    role: user.role,
+    access,
+    label: label && label.value ? label.value.toString() : "",
   };
 };

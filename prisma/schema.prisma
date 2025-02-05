@@ -43,6 +43,7 @@ model Session {
   expiresAt DateTime
   userId    String
   user      User     @relation(references: [id], fields: [userId])
+  createdAt DateTime @default(now())
 }
 
 model PasswordResetToken {

@@ -46,10 +46,10 @@ export const changePassword = async (
     where: { id: parsedInput.data.userId },
   });
   const hashedPassword = await new Argon2id().hash(parsedInput.data.password);
-  await prisma.user.update({
+  console.log(await prisma.user.update({
     where: { id: parsedInput.data.userId },
     data: { hashedPassword },
-  });
+  }), hashedPassword);
   redirect(`/profile/${user.id}`);
   return { ok: true };
 };

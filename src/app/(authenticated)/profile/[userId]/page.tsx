@@ -6,6 +6,7 @@ import ProfilePhotos from "../_components/ProfilePhotos";
 import ProfileStatistic from "../_components/Statistic";
 import { Metadata } from "next";
 import { getUser } from "./_queries";
+import AdminBlock from "../_components/AdminBlock";
 
 export const generateMetadata = async ({
   params,
@@ -35,7 +36,7 @@ const ProfilePage = async ({
         <ProfilePhotos userId={userId} />
         <ProfileStatistic userId={userId} />
       </div>
-      {/* {user && user.role === UserRole.ADMIN && <AdminBlock />} */}
+      {user && user.role === UserRole.ADMIN && <AdminBlock userId={userId} />}
     </>
   );
 };

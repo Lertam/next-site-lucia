@@ -7,24 +7,25 @@ import AdminBlock from "./_components/AdminBlock";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-export const metadata:Metadata = {
-  title: "Профиль"
-}
+export const metadata: Metadata = {
+  title: "Профиль",
+};
 
 const ProfilePage = async () => {
   const { user } = await getAuth();
-  if(!user) {
-    return redirect('/auth/sign-in')
+  if (!user) {
+    return redirect("/auth/sign-in");
   }
+
   return (
     <>
       <h1 className={"text-center font-bold mt-4 uppercase"}>Кабинет</h1>
       <div className={"flex gap-4 flex-auto"}>
-        <ProfileData />
-        <ProfilePhotos />
-        <ProfileStatistic />
+        <ProfileData userId={user.id} />
+        <ProfilePhotos userId={user.id} />
+        <ProfileStatistic userId={user.id}/>
       </div>
-      {/* {user && user.role === UserRole.ADMIN && <AdminBlock />} */}
+      {user && user.role === UserRole.ADMIN && <AdminBlock userId={user.id} />}
     </>
   );
 };

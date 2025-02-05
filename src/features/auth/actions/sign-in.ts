@@ -72,7 +72,7 @@ const signIn = async (
     console.log("SignInErr", error);
   }
 
-  redirect("/dashboard");
+  redirect("/");
 };
 
 export { signIn };

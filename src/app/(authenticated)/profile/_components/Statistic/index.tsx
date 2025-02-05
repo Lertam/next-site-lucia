@@ -4,13 +4,13 @@ import { getUserStatistic } from "../../[userId]/_queries";
 import { getAuth } from "@/features/auth/queries/get-auth";
 import { redirect } from "next/navigation";
 
-const ProfileStatistic: FC<{ userId?: string }> = async ({ userId }) => {
+const ProfileStatistic: FC<{ userId: string }> = async ({ userId }) => {
   // TODO Implement
   const { user } = await getAuth();
   if (!user) {
     return redirect("/");
   }
-  const stats = await getUserStatistic(userId ? userId : user.id);
+  const stats = await getUserStatistic(userId);
   return (
     <div
       className={

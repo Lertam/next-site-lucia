@@ -28,7 +28,10 @@ const Retoucher: FC<RetoucherMeta> = ({ name, avatar }) => {
       >
         {name}
       </span>
-      <img src={avatar} className={"rounded-full border border-foreground"} />
+      <img
+        src={`/modules/user/${avatar}`}
+        className={"rounded-full border border-foreground w-24 h-24"}
+      />
       <button
         className={
           "p-1 bg-foreground text-white uppercase text-xs hover:bg-transparent hover:text-black font-bold"

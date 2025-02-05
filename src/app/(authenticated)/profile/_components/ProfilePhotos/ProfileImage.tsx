@@ -1,6 +1,6 @@
 "use client";
 import { FC, useEffect, useRef, useState } from "react";
-import { saveAvatar } from "../../[userId]/_actions";
+import { saveAvatar } from "../../[userId]/_actions/save-avatar";
 
 const ProfileImage: FC<{ userId: string; image: string }> = ({
   userId,

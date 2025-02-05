@@ -2,7 +2,7 @@
 import FormInput from "@/components/Forms/FormInput";
 import SubmitButton from "@/components/Forms/SubmitButton";
 import { FC, useActionState } from "react";
-import { changePassword } from "./change-password";
+import { changePassword } from "../_actions/change-password";
 
 const ChangePasswordForm: FC<{ userId: string }> = ({ userId }) => {
   const [state, action] = useActionState(changePassword, { ok: false });

@@ -1,6 +1,6 @@
 "use client";
 import { FC, useEffect, useRef, useState } from "react";
-import { saveStandart } from "../../[userId]/_actions";
+import { saveStandart } from "../../[userId]/_actions/save-standart";
 
 const RetouchStandard: FC<{ image: string | null; userId: string }> = ({
   image,
@@ -19,7 +19,7 @@ const RetouchStandard: FC<{ image: string | null; userId: string }> = ({
 
   return (
     <div className={"flex flex-col items-center"}>
-      <h3>Эталон ретуши профиля</h3>
+      <h3>Эталон ретуши</h3>
       {/* TODO Add adaptive to image */}
       {editMode ? (
         <div>

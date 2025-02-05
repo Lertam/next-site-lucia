@@ -1,7 +1,7 @@
 import { FC } from "react";
 import ProfileInfo from "./Info";
 
-const ProfileData:FC<{userId?: string}> = ({userId}) => {
+const ProfileData:FC<{userId: string}> = ({userId}) => {
   // TODO Implament edit mode
 
   return (
