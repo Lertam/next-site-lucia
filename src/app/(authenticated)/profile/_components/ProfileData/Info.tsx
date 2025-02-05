@@ -5,7 +5,7 @@ import Link from "next/link";
 import { getUserInfo } from "../../[userId]/_queries";
 import { FC } from "react";
 
-const ProfileInfo:FC<{userId?:string}> = async ({userId}) => {
+const ProfileInfo:FC<{userId:string}> = async ({userId}) => {
   const { user } = await getAuth();
   if (!user) return null;
   const data = await getUserInfo(userId);

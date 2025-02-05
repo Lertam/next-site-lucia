@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getUserBalance } from "../../_queries";
+import { formatCurrency } from "@/lib/utils";
 
 const BalanceBlock = async () => {
   const balance = await getUserBalance();
@@ -9,7 +10,7 @@ const BalanceBlock = async () => {
         "absolute bottom-5 flex flex-col items-center font-bold gap-y-2"
       }
     >
-      <span>Баланс: {balance} р.</span>
+      <span>Баланс: {formatCurrency(balance)}</span>
       <Link href={"/refund"} className="main-button">
         Пополнить счет
       </Link>

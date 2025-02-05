@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { ComponentProps, FC } from "react";
 
 const FormSwitch: FC<{
   label: string;
@@ -6,9 +6,10 @@ const FormSwitch: FC<{
   id: string;
   name: string;
   error?: string[];
-}> = ({ label, defaultChecked: checked, name, id, error }) => {
+  containerProps?: ComponentProps<"div">;
+}> = ({ label, defaultChecked: checked, name, id, error, containerProps }) => {
   return (
-    <div className={"mb-4"}>
+    <div className={"mb-4"} {...containerProps}>
       <label className={"inline-flex items-center cursor-pointer"}>
         <input
           type={"checkbox"}

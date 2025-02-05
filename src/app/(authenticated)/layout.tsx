@@ -7,7 +7,7 @@ export default async function AuthenticatedLayout({
   const { user } = await getAuth();
 
   if (!user) {
-    redirect("/sign-in");
+    redirect("/auth/signin");
   }
   return <>{children}</>;
 }

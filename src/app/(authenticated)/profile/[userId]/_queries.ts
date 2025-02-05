@@ -67,3 +67,30 @@ export const getUserPhotos = async (
     standart: row ? `/modules/retouch/standarts/${row.value}` : null,
   };
 };
+
+export const getAdminData = async (
+  userId: string
+): Promise<{ meta: { login: Date | null; created: Date | null } }> => {
+  const { user: currentUser } = await getAuth();
+  if (!currentUser || currentUser.role !== UserRole.ADMIN) {
+    throw new Error("Not authorized");
+  }
+
+  const session = await prisma.session.findFirst({
+    where: { userId },
+    orderBy: { createdAt: "desc" },
+    include: {
+      user: {
+        select: {
+          createdAt: true,
+        },
+      },
+    },
+  });
+  return {
+    meta: {
+      created: session ? session.user.createdAt : null,
+      login: session ? session.createdAt : null,
+    },
+  };
+};
