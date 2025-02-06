@@ -44,14 +44,18 @@ const ShopPage = async ({
         <Sorting />
         <Search placeholder={"Название или ID"} />
       </div>
-      <div className={"mt-4 grid grid-cols-8 gap-4"}>
+      <div className={"mt-4 grid grid-cols-6 gap-4 content-center"}>
         {items.map((item) => (
-          <div key={`img${item.id}`}>
-            <img
-              key={item.id}
-              src={`/modules/shop/previews/${item.preview}`}
-              alt={item.name}
-            />
+          <div key={`img${item.id}`} className={"flex flex-col"}>
+            <div
+              className={"bg-black flex flex-col items-center justify-center flex-1"}
+            >
+              <img
+                key={item.id}
+                src={`/modules/shop/mini/${item.mini}`}
+                alt={item.name}
+              />
+            </div>
             <span>{item.price}</span>
           </div>
         ))}

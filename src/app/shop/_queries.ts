@@ -2,7 +2,7 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 30;
 
 export const getShopItems = async (
   category: string,
@@ -10,6 +10,7 @@ export const getShopItems = async (
   query: string = "",
   currentPage: number = 1
 ) => {
+  console.log("where", generateWhere(category, query));
   return prisma.shopItem.findMany({
     where: generateWhere(category, query),
     orderBy: generateOrderBy(sorting),
@@ -66,6 +67,6 @@ export const getShopPages = async (category: string, query: string = "") => {
   const totalCount = await prisma.shopItem.count({
     where: generateWhere(category, query),
   });
-  console.log(totalCount)
+  console.log(totalCount);
   return Math.ceil(totalCount / ITEMS_PER_PAGE);
 };
