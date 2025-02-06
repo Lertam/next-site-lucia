@@ -31,12 +31,17 @@
     "@types/nodemailer": "^6.4.16",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "basic-ftp": "^5.0.5",
+    "dotenv": "^16.4.7",
     "eslint": "^8",
     "eslint-config-next": "14.2.14",
+    "mysql2": "^3.12.0",
+    "php-serialize": "^5.0.1",
     "postcss": "^8",
     "prisma": "^5.22.0",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "uuid": "^11.0.5"
   }
 }

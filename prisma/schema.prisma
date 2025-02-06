@@ -163,6 +163,7 @@ model NewsComment {
 model ShopItem {
   id      Int      @id @default(autoincrement())
   name    String
+  mini    String
   preview String
   source  String
   created DateTime @default(now())
